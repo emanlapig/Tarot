@@ -1,0 +1,631 @@
+{
+	"cards": [
+		{
+			"name": "The Fool",
+			"suit": "Major Arcana",
+			"no": "0",
+			"img": "00.jpg",
+			"tags": [],
+			"description": ""
+		},
+		{
+			"name": "The Magician",
+			"suit": "Major Arcana",
+			"no": "I",
+			"img": "01.jpg",
+			"tags": [],
+			"description": ""
+		},
+		{
+			"name": "The ",
+			"suit": "Major Arcana",
+			"no": "II",
+			"img": "02.jpg",
+			"tags": [],
+			"description": ""
+		},
+		{
+			"name": "The Empress",
+			"suit": "Major Arcana",
+			"no": "III",
+			"img": "03.jpg",
+			"tags": [],
+			"description": ""
+		},
+		{
+			"name": "The Emperor",
+			"suit": "Major Arcana",
+			"no": "IV",
+			"img": "04.jpg",
+			"tags": [],
+			"description": ""
+		},
+		{
+			"name": "The Hierophant",
+			"suit": "Major Arcana",
+			"no": "V",
+			"img": "05.jpg",
+			"tags": [],
+			"description": ""
+		},
+		{
+			"name": "The Lovers",
+			"suit": "Major Arcana",
+			"no": "VI",
+			"img": "06.jpg",
+			"tags": [],
+			"description": ""
+		},
+		{
+			"name": "The Chariot",
+			"suit": "Major Arcana",
+			"no": "VII",
+			"img": "07.jpg",
+			"tags": [],
+			"description": ""
+		},
+		{
+			"name": "The Strength",
+			"suit": "Major Arcana",
+			"no": "VIII",
+			"img": "08.jpg",
+			"tags": [],
+			"description": ""
+		},
+		{
+			"name": "The Hermit",
+			"suit": "Major Arcana",
+			"no": "IX",
+			"img": "09.jpg",
+			"tags": [],
+			"description": ""
+		},
+		{
+			"name": "The Wheel of Fortune",
+			"suit": "Major Arcana",
+			"no": "X",
+			"img": "10.jpg",
+			"tags": [],
+			"description": ""
+		},
+		{
+			"name": "Justice",
+			"suit": "Major Arcana",
+			"no": "XI",
+			"img": "11.jpg",
+			"tags": [],
+			"description": ""
+		},
+		{
+			"name": "The Hanged Man",
+			"suit": "Major Arcana",
+			"no": "XII",
+			"img": "12.jpg",
+			"tags": [],
+			"description": ""
+		},
+		{
+			"name": "Death",
+			"suit": "Major Arcana",
+			"no": "XIII",
+			"img": "13.jpg",
+			"tags": [],
+			"description": ""
+		},
+		{
+			"name": "Temperance",
+			"suit": "Major Arcana",
+			"no": "XIV",
+			"img": "14.jpg",
+			"tags": [],
+			"description": ""
+		},
+		{
+			"name": "The Devil",
+			"suit": "Major Arcana",
+			"no": "XV",
+			"img": "15.jpg",
+			"tags": [],
+			"description": ""
+		},
+		{
+			"name": "The Tower",
+			"suit": "Major Arcana",
+			"no": "XVI",
+			"img": "16.jpg",
+			"tags": [],
+			"description": ""
+		},
+		{
+			"name": "The Star",
+			"suit": "Major Arcana",
+			"no": "XVII",
+			"img": "17.jpg",
+			"tags": [],
+			"description": ""
+		},
+		{
+			"name": "The Moon",
+			"suit": "Major Arcana",
+			"no": "XVIII",
+			"img": "18.jpg",
+			"tags": [],
+			"description": ""
+		},
+		{
+			"name": "The Sun",
+			"suit": "Major Arcana",
+			"no": "XIX",
+			"img": "19.jpg",
+			"tags": [],
+			"description": ""
+		},
+		{
+			"name": "Judgment",
+			"suit": "Major Arcana",
+			"no": "XX",
+			"img": "20.jpg",
+			"tags": [],
+			"description": ""
+		},
+		{
+			"name": "The World",
+			"suit": "Major Arcana",
+			"no": "XXI",
+			"img": "21.jpg",
+			"tags": [],
+			"description": ""
+		},
+		{
+			"name": "Ace of Wands",
+			"suit": "Wands",
+			"no": "",
+			"img": "22.jpg",
+			"tags": [],
+			"description": ""
+		},
+		{
+			"name": "Two of Wands",
+			"suit": "Wands",
+			"no": "II",
+			"img": "23.jpg",
+			"tags": [],
+			"description": ""
+		},
+		{
+			"name": "Three of Wands",
+			"suit": "Wands",
+			"no": "III",
+			"img": "24.jpg",
+			"tags": [],
+			"description": ""
+		},
+		{
+			"name": "Four of Wands",
+			"suit": "Wands",
+			"no": "IV",
+			"img": "25.jpg",
+			"tags": [],
+			"description": ""
+		},
+		{
+			"name": "Five of Wands",
+			"suit": "Wands",
+			"no": "V",
+			"img": "26.jpg",
+			"tags": [],
+			"description": ""
+		},
+		{
+			"name": "Six of Wands",
+			"suit": "Wands",
+			"no": "VI",
+			"img": "27.jpg",
+			"tags": [],
+			"description": ""
+		},
+		{
+			"name": "Seven of Wands",
+			"suit": "Wands",
+			"no": "VII",
+			"img": "28.jpg",
+			"tags": [],
+			"description": ""
+		},
+		{
+			"name": "Eight of Wands",
+			"suit": "Wands",
+			"no": "VIII",
+			"img": "29.jpg",
+			"tags": [],
+			"description": ""
+		},
+		{
+			"name": "Nine of Wands",
+			"suit": "Wands",
+			"no": "IX",
+			"img": "30.jpg",
+			"tags": [],
+			"description": ""
+		},
+		{
+			"name": "Ten of Wands",
+			"suit": "Wands",
+			"no": "X",
+			"img": "31.jpg",
+			"tags": [],
+			"description": ""
+		},
+		{
+			"name": "Page of Wands",
+			"suit": "Wands",
+			"no": "",
+			"img": "32.jpg",
+			"tags": [],
+			"description": ""
+		},
+		{
+			"name": "Knight of Wands",
+			"suit": "Wands",
+			"no": "",
+			"img": "33.jpg",
+			"tags": [],
+			"description": ""
+		},
+		{
+			"name": "Queen of Wands",
+			"suit": "Wands",
+			"no": "",
+			"img": "34.jpg",
+			"tags": [],
+			"description": ""
+		},
+		{
+			"name": "King of Wands",
+			"suit": "Wands",
+			"no": "",
+			"img": "35.jpg",
+			"tags": [],
+			"description": ""
+		},
+		{
+			"name": "Ace of Cups",
+			"suit": "Cups",
+			"no": "",
+			"img": "36.jpg",
+			"tags": [],
+			"description": ""
+		},
+		{
+			"name": "Two of Cups",
+			"suit": "Cups",
+			"no": "II",
+			"img": "37.jpg",
+			"tags": [],
+			"description": ""
+		},
+		{
+			"name": "Three of Cups",
+			"suit": "Cups",
+			"no": "III",
+			"img": "38.jpg",
+			"tags": [],
+			"description": ""
+		},
+		{
+			"name": "Four of Cups",
+			"suit": "Cups",
+			"no": "IV",
+			"img": "39.jpg",
+			"tags": [],
+			"description": ""
+		},
+		{
+			"name": "Five of Cups",
+			"suit": "Cups",
+			"no": "V",
+			"img": "40.jpg",
+			"tags": [],
+			"description": ""
+		},
+		{
+			"name": "Six of Cups",
+			"suit": "Cups",
+			"no": "VI",
+			"img": "41.jpg",
+			"tags": [],
+			"description": ""
+		},
+		{
+			"name": "Seven of Cups",
+			"suit": "Cups",
+			"no": "VII",
+			"img": "42.jpg",
+			"tags": [],
+			"description": ""
+		},
+		{
+			"name": "Eight of Cups",
+			"suit": "Cups",
+			"no": "VIII",
+			"img": "43.jpg",
+			"tags": [],
+			"description": ""
+		},
+		{
+			"name": "Nine of Cups",
+			"suit": "Cups",
+			"no": "IX",
+			"img": "44.jpg",
+			"tags": [],
+			"description": ""
+		},
+		{
+			"name": "Ten of Cups",
+			"suit": "Cups",
+			"no": "X",
+			"img": "45.jpg",
+			"tags": [],
+			"description": ""
+		},
+		{
+			"name": "Page of Cups",
+			"suit": "Cups",
+			"no": "",
+			"img": "46.jpg",
+			"tags": [],
+			"description": ""
+		},
+		{
+			"name": "Knight of Cups",
+			"suit": "Wands",
+			"no": "",
+			"img": "47.jpg",
+			"tags": [],
+			"description": ""
+		},
+		{
+			"name": "Queen of Cups",
+			"suit": "Cups",
+			"no": "",
+			"img": "48.jpg",
+			"tags": [],
+			"description": ""
+		},
+		{
+			"name": "King of Cups",
+			"suit": "Cups",
+			"no": "",
+			"img": "49.jpg",
+			"tags": [],
+			"description": ""
+		},
+		{
+			"name": "Ace of Swords",
+			"suit": "Swords",
+			"no": "",
+			"img": "50.jpg",
+			"tags": [],
+			"description": ""
+		},
+		{
+			"name": "Two of Swords",
+			"suit": "Swords",
+			"no": "II",
+			"img": "51.jpg",
+			"tags": [],
+			"description": ""
+		},
+		{
+			"name": "Three of Swords",
+			"suit": "Swords",
+			"no": "III",
+			"img": "52.jpg",
+			"tags": [],
+			"description": ""
+		},
+		{
+			"name": "Four of Swords",
+			"suit": "Swords",
+			"no": "IV",
+			"img": "53.jpg",
+			"tags": [],
+			"description": ""
+		},
+		{
+			"name": "Five of Swords",
+			"suit": "Swords",
+			"no": "V",
+			"img": "54.jpg",
+			"tags": [],
+			"description": ""
+		},
+		{
+			"name": "Six of Swords",
+			"suit": "Swords",
+			"no": "VI",
+			"img": "55.jpg",
+			"tags": [],
+			"description": ""
+		},
+		{
+			"name": "Seven of Swords",
+			"suit": "Swords",
+			"no": "VII",
+			"img": "56.jpg",
+			"tags": [],
+			"description": ""
+		},
+		{
+			"name": "Eight of Swords",
+			"suit": "Swords",
+			"no": "VIII",
+			"img": "57.jpg",
+			"tags": [],
+			"description": ""
+		},
+		{
+			"name": "Nine of Swords",
+			"suit": "Swords",
+			"no": "IX",
+			"img": "58.jpg",
+			"tags": [],
+			"description": ""
+		},
+		{
+			"name": "Ten of Swords",
+			"suit": "Swords",
+			"no": "X",
+			"img": "59.jpg",
+			"tags": [],
+			"description": ""
+		},
+		{
+			"name": "Page of Swords",
+			"suit": "Swords",
+			"no": "",
+			"img": "60.jpg",
+			"tags": [],
+			"description": ""
+		},
+		{
+			"name": "Knight of Swords",
+			"suit": "Swords",
+			"no": "",
+			"img": "61.jpg",
+			"tags": [],
+			"description": ""
+		},
+		{
+			"name": "Queen of Swords",
+			"suit": "Swords",
+			"no": "",
+			"img": "62.jpg",
+			"tags": [],
+			"description": ""
+		},
+		{
+			"name": "King of Swords",
+			"suit": "Swords",
+			"no": "",
+			"img": "63.jpg",
+			"tags": [],
+			"description": ""
+		},
+		{
+			"name": "Ace of Pentacles",
+			"suit": "Pentacles",
+			"no": "",
+			"img": "64.jpg",
+			"tags": [],
+			"description": ""
+		},
+		{
+			"name": "Two of Pentacles",
+			"suit": "Pentacles",
+			"no": "II",
+			"img": "65.jpg",
+			"tags": [],
+			"description": ""
+		},
+		{
+			"name": "Three of Pentacles",
+			"suit": "Pentacles",
+			"no": "III",
+			"img": "66.jpg",
+			"tags": [],
+			"description": ""
+		},
+		{
+			"name": "Four of Pentacles",
+			"suit": "Pentacles",
+			"no": "IV",
+			"img": "67.jpg",
+			"tags": [],
+			"description": ""
+		},
+		{
+			"name": "Five of Pentacles",
+			"suit": "Pentacles",
+			"no": "V",
+			"img": "68.jpg",
+			"tags": [],
+			"description": ""
+		},
+		{
+			"name": "Six of Pentacles",
+			"suit": "Pentacles",
+			"no": "VI",
+			"img": "69.jpg",
+			"tags": [],
+			"description": ""
+		},
+		{
+			"name": "Seven of Pentacles",
+			"suit": "Pentacles",
+			"no": "VII",
+			"img": "70.jpg",
+			"tags": [],
+			"description": ""
+		},
+		{
+			"name": "Eight of Pentacles",
+			"suit": "Pentacles",
+			"no": "VIII",
+			"img": "71.jpg",
+			"tags": [],
+			"description": ""
+		},
+		{
+			"name": "Nine of Pentacles",
+			"suit": "Pentacles",
+			"no": "IX",
+			"img": "72.jpg",
+			"tags": [],
+			"description": ""
+		},
+		{
+			"name": "Ten of Pentacles",
+			"suit": "Pentacles",
+			"no": "X",
+			"img": "73.jpg",
+			"tags": [],
+			"description": ""
+		},
+		{
+			"name": "Page of Pentacles",
+			"suit": "Pentacles",
+			"no": "",
+			"img": "74.jpg",
+			"tags": [],
+			"description": ""
+		},
+		{
+			"name": "Knight of Pentacles",
+			"suit": "Pentacles",
+			"no": "",
+			"img": "75.jpg",
+			"tags": [],
+			"description": ""
+		},
+		{
+			"name": "Queen of Pentacles",
+			"suit": "Pentacles",
+			"no": "",
+			"img": "76.jpg",
+			"tags": [],
+			"description": ""
+		},
+		{
+			"name": "King of Pentacles",
+			"suit": "Pentacles",
+			"no": "",
+			"img": "77.jpg",
+			"tags": [],
+			"description": ""
+		},
+	],
+	"tags": [
+
+	]
+}
