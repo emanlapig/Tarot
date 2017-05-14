@@ -1,108 +1,159 @@
 // BGem Tarot Main JS
 
-var cardNodes = [],
-	shuffle = {
-		index: 0,
-		collect: 0,
-		flip: 0
-	};
-
-function init() {
-	load_cards();
-	$( "div" ).on( "touchstart", function(e) { e.preventDefault(); } );
-	$( "#done-btn" ).on( "click touchstart", collectShuffle );
-	shuffle.index = 0;
-	setTimeout( function() {
-		shuffle.flip = setInterval( function() {
-			$( "#card-" + shuffle.index ).addClass( "flip" );
-			shuffle.index += 1;
-			if ( shuffle.index === cardNodes.length ) {
-				clearInterval( shuffle.flip );
-				shuffle.index = 0;
-			}
-		}, 50 );
-	}, 2000 );
-};
-
-function load_cards() {
-	for ( var i=0; i<cardData.cards.length; i++ ) {
-		var card = document.createElement( "div" );
-		card.setAttribute( "class", "card" );
-		card.setAttribute( "id", "card-" + i );
-		card.innerHTML = "<img src='img/decks/UWaite/" + i + ".jpg' />";
-		$( ".cards-container" ).append( card );
-		var cardWidth = .05 * window.innerWidth,
-			boxWidth = Math.floor( cardWidth * 13 ),
-			sideMargin = Math.floor( ( window.innerWidth - boxWidth ) / 2 ),
-			x = Math.floor( i%13 * ( cardWidth ) + sideMargin ),
-			y = Math.floor( Math.floor( i/13 ) * window.innerHeight/7 );
-		cardNodes.push([ 
-			x,
-			x + cardWidth,
-			y,
-			y + cardWidth*1.5,
-			i
-		]);
-		$( card ).css( { "left": x + "px", "top": y + "px" } );
-		$( ".touch-area" ).on( "touchmove mousemove", function( e ) {
-			var touchX = ( e.originalEvent.touches !== undefined )? e.originalEvent.touches[0].pageX : e.pageX,
-				touchY = ( e.originalEvent.touches !== undefined )? e.originalEvent.touches[0].pageY : e.pageY
-			for ( var i=0; i<cardNodes.length; i++ ) {
-				if ( 
-					touchX > cardNodes[i][0]-cardWidth &&
-					touchX < cardNodes[i][1]+cardWidth &&
-					touchY > cardNodes[i][2]-cardWidth*1.5 &&
-					touchY < cardNodes[i][3]+cardWidth*1.5
-				) {
-					var x = Math.floor( random( 0, window.innerWidth - cardWidth ) ),
-						y = Math.floor( random( 0, window.innerHeight - cardWidth*1.5 ) );
-					cardNodes[i] = [
-						x,
-						x + cardWidth,
-						y,
-						y + cardWidth*1.5,
-						i
-					];
-					$( "#card-" + i ).css( { "left": x + "px", "top": y + "px" } );
+// Controller
+var C = {
+	cards: [],
+	init: function() {
+		$( "div" ).on( "touchstart", function(e) { e.preventDefault(); } );
+		$( ".main-menu #get-reading" ).on( "click touchstart", C.get_reading.init );
+		/*V.load_decks();
+		shuffle.index = 0;
+		setTimeout( function() {
+			shuffle.flip = setInterval( function() {
+				$( "#card-" + shuffle.index ).addClass( "flip" );
+				shuffle.index += 1;
+				if ( shuffle.index === C.cards.length ) {
+					clearInterval( shuffle.flip );
+					shuffle.index = 0;
 				}
-			}
-		});
+			}, 50 );
+		}, 2000 );*/
+	},
+	get_reading: {
+		mode: "single",
+		init: function() {
+			V.go_to_page( ".page.reading-menu" );
+			V.get_reading.load_decks();
+			$( ".page.reading-menu #single-card" ).on( "click touchstart", C.get_reading.single );
+		},
+		single: function() {
+			V.go_to_page( ".page.reading" );
+			C.get_reading.mode = "single";
+			shuffle.index = 0;
+			shuffle.flip = setInterval( function() {
+				$( "#card-" + shuffle.index ).addClass( "flip" );
+				shuffle.index += 1;
+				if ( shuffle.index === C.cards.length ) {
+					clearInterval( shuffle.flip );
+					shuffle.index = 0;
+				}
+			}, 50 );
+			setTimeout( C.get_reading.bind_touch, 50*C.cards.length );
+			$( ".page.reading #done-shuffling" ).on( "click touchstart", shuffle.collectShuffle );
+		},
+		bind_touch: function() {
+			$( ".touch-area" ).on( "touchmove mousemove", function( e ) {
+				var touchX = ( e.originalEvent.touches !== undefined )? e.originalEvent.touches[0].pageX : e.pageX,
+					touchY = ( e.originalEvent.touches !== undefined )? e.originalEvent.touches[0].pageY : e.pageY,
+					cardWidth = .05 * window.innerWidth,
+					boxWidth = Math.floor( cardWidth * 13 ),
+					sideMargin = Math.floor( ( window.innerWidth - boxWidth ) / 2 );
+				for ( var i=0; i<C.cards.length; i++ ) {
+					if ( 
+						touchX > C.cards[i][0]-cardWidth &&
+						touchX < C.cards[i][1]+cardWidth &&
+						touchY > C.cards[i][2]-cardWidth*1.5 &&
+						touchY < C.cards[i][3]+cardWidth*1.5
+					) {
+						var x = Math.floor( random( 0, window.innerWidth - cardWidth ) ),
+							y = Math.floor( random( 0, window.innerHeight - cardWidth*1.5 ) );
+						C.cards[i] = [
+							x,
+							x + cardWidth,
+							y,
+							y + cardWidth*1.5,
+							i
+						];
+						$( "#card-" + i ).css( { "left": x + "px", "top": y + "px" } );
+					}
+				}
+			});
+		}
 	}
 };
 
-function collectShuffle() {
-	$( ".touch-area" ).unbind();
-	cardNodes.sort( function( a, b ) {
-		return a[0] - b[0];
-	});
-	shuffle.index = 0;
-	shuffle.collect = setInterval( function(){
-		$( "#card-" + cardNodes[ shuffle.index ][4] ).css( { "top": window.innerHeight - 200 + "px", "left": shuffle.index*10 + 100 + "px", "z-index": shuffle.index } );
-		shuffle.index += 1;
-		if ( shuffle.index === cardNodes.length ) {
-			$( ".touch-area" ).css( "display", "none" )
-			clearInterval( shuffle.collect );
+// View
+var V = {
+	get_reading: {
+		init: function() {
+		},
+		load_decks: function() {
+			for ( var i=0; i<M.cards.length; i++ ) {
+				var card = document.createElement( "div" );
+				card.setAttribute( "class", "card" );
+				card.setAttribute( "id", "card-" + i );
+				card.setAttribute( "data-card", i );
+				card.innerHTML = "<img src='img/decks/UWaite/" + i + ".jpg' />";
+				$( ".reading" ).append( card );
+				var cardWidth = .05 * window.innerWidth,
+					boxWidth = Math.floor( cardWidth * 13 ),
+					sideMargin = Math.floor( ( window.innerWidth - boxWidth ) / 2 ),
+					x = Math.floor( i%13 * ( cardWidth ) + sideMargin ),
+					y = Math.floor( Math.floor( i/13 ) * window.innerHeight/7 );
+				C.cards.push([ 
+					x,
+					x + cardWidth,
+					y,
+					y + cardWidth*1.5,
+					i
+				]);
+				$( card ).css( { "left": x + "px", "top": y + "px" } ).on( "click touchstart", function( e ) {
+					V.get_reading.draw_card( $( e.target ).parent().attr( "data-card" ) );
+				});
+			}
+		},
+		draw_card: function( card ) {
+			console.log( card );
+			if ( C.get_reading.mode === "single" ) {
+				$( "#card-" + card ).addClass( "draw-1" );
+				$( ".card:not(#card-" + card + ")" ).addClass( "hidden" );
+				setTimeout( function() {
+					$( "#card-" + card ).removeClass( "flip" );
+				}, 1000 );
+			};
 		}
-	}, 50 );
-};
+	},
+	shuffle: {
+		index: 0,
+		collect: 0,
+		flip: 0,
+		collectShuffle: function() {
+			$( ".touch-area" ).unbind();
+			C.cards.sort( function( a, b ) {
+				return a[0] - b[0];
+			});
+			shuffle.index = 0;
+			shuffle.collect = setInterval( function(){
+				$( "#card-" + C.cards[ shuffle.index ][4] ).css( { "top": window.innerHeight - 200 + "px", "left": shuffle.index*10 + 100 + "px", "z-index": shuffle.index } );
+				shuffle.index += 1;
+				if ( shuffle.index === C.cards.length ) {
+					$( ".touch-area" ).css( "display", "none" )
+					clearInterval( shuffle.collect );
+				}
+			}, 50 );
+		}
+	},
+	go_to_page: function( to ) {
+		var from = $( ".page" );
+		for ( var i=0; i<from.length; i++ ) {
+			if ( $( from[i] ).hasClass( "show" ) ) {
+				$( from[i] ).removeClass( "show" ).addClass( "hidden" );
+			}
+		}
+		setTimeout( function() {
+			$( to ).removeClass( "hidden" ).addClass( "show" );
+		}, 200 );
+	},
+}
 
-var cardLoader = {
-
-};
-
-var shuffler = {
-	
-};
-
-var reader = {
-
-};
+var shuffle = V.shuffle;
 
 function random( min, max ) {
 	return Math.floor( ( Math.random() * max ) + min );
 };
 
-var cardData = {
+// Model
+var M = {
 	"cards": [
 		{
 			"name": "The Fool",
@@ -739,7 +790,7 @@ var cardData = {
 
 /*function load_cards() {
 	$.ajax({
-		url: "js/cardData.json",
+		url: "js/M.json",
 		success: function( data ) {
 			console.log( data );
 		},

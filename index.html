@@ -9,16 +9,27 @@
 	<div class="bg blue-grad">
 	</div>
 
-	<div class="cards-container">
-		<div class="touch-area"></div>
+	<!--MAIN MENU-->
+	<div class="page main-menu show">
+		<h2>Welcome</h2>
+		<a class="btn" id="get-reading" href="javascript:;">Get Reading</a>
+		<a class="btn" id="browse-cards" href="javascript:;">Browse Cards</a>
 	</div>
 
-	<span id="done-btn" style="color:#fff; display:block; position:absolute; z-index:2000; font-family:sans-serif; cursor:pointer;">
-		done shuffling
-	</span>
+	<!--GET READING-->
+	<div class="page reading-menu hidden">
+		<a class="btn" id="single-card" href="javascript:;">Single Card</a>
+		<a class="btn" id="three-card" href="javascript:;">Three Card</a>
+		<a class="btn" id="celtic-cross" href="javascript:;">Celtic Cross</a>
+	</div>
+	<div class="page reading hidden">
+		<a class="btn" id="done-shuffling" href="javascript:;">Done shuffling</a>
+		<div class="touch-area"></div>
+		<div class="preload"></div>
+	</div>
 
 	<script type="text/javascript">
-		$( document ).ready( init );
+		$( document ).ready( C.init );
 	</script>
 </body>
 </html>
