@@ -1,9 +1,9 @@
 {
-  "name": "EMJP-v3",
+  "name": "Tarot",
   "version": "0.1.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/emanlapig/EMJP-v3.git"
+    "url": "https://github.com/emanlapig/Tarot.git"
   },
   "devDependencies": {
     "grunt": "^1.0.1",
