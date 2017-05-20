@@ -4,7 +4,7 @@
 var C = {
 	cards: [],
 	init: function() {
-		$( "div" ).on( "touchstart", function( e ) { e.preventDefault(); } );
+		$( "div" ).on( "touchstart", function( e ) { e.preventDefault(); e.stopPropagation(); } );
 		$( ".main-menu #get-reading" ).on( "click touchstart", C.reading.init );
 	},
 	reading: {
@@ -92,8 +92,9 @@ var V = {
 			console.log( card );
 			if ( C.reading.mode === "single" ) {
 				$( "#card-" + card ).addClass( "draw-1" );
-				$( ".card:not(#card-" + card + ")" ).addClass( "hidden" );
+				$( ".card:not(#card-" + card + ")" ).addClass( "collect" );
 				setTimeout( function() {
+					$( ".card:not(#card-" + card + ")" ).addClass( "hidden" );
 					$( "#card-" + card ).removeClass( "flip" );
 				}, 1000 );
 			};
@@ -108,11 +109,11 @@ var V = {
 					return a[0] - b[0];
 				});
 				shuffle.index = 0;
-				shuffle.collect = setInterval( function(){
+				shuffle.collect = setInterval( function() {
 					$( "#card-" + C.cards[ shuffle.index ][4] ).css( { "top": window.innerHeight - 200 + "px", "left": shuffle.index*10 + 100 + "px", "z-index": shuffle.index } );
 					shuffle.index += 1;
 					if ( shuffle.index === C.cards.length ) {
-						$( ".touch-area" ).css( "display", "none" )
+						$( ".touch-area" ).css( "display", "none" );
 						clearInterval( shuffle.collect );
 					}
 				}, 50 );
@@ -161,12 +162,13 @@ var M = {
 
 		},
 		{
-			"name": "The ",
+			"name": "The High Priestess",
 			"suit": "Major Arcana",
 			"no": "II",
 			"img": "02.jpg",
 			"tags": [],
-			"description": ""
+			"description": "",
+			"details:": "<p>Sometimes referred to as the Papess or the Lady of the Silver Star, the High Priestess is the key card of the feminine Divine. She represents the veiled Isis, the mystery within the heart of the temple. She is the Virgin Moon and symbolizes secret knowledge. As the moon rules the ocean tides, the High Priestess rules the tides of life. Her blue gown flows with fluidity, and where garments hide her feet, a river begins to form. The crescent moon at the High Priestess's feet, a symbol of feminine power, is bathed by the ebb and flow of the primal water. Upon her breast, an equal-armed cross shows the perfect balance of the elements within her: air, fire, water, and earth. Upon her brow are the horns and disc of the Egyptian Goddess Isis. The veil of the temple in the background bears the feminine pomegranates and the masculine palm flowers, symbolizing balance between the masculine and feminine aspects of the Divine. United together, the curtain's pattern indicates the fertile creativity of the subconscious mind. The Lady is seated between the temple pillars, Boaz and Jachin; severity and mercy, in complete harmony. In her hands we can see the half hidden scroll of knowledge, the Torah, otherwise known as the Divine Laws. The High Priestess will allow access to her secrets only incrementally. But if you follow the river emerging from her robe, the stream of consciousness, you will discover more and more of her ways. You will become spiritually enlightened. The link between that which we see, and that which we do not see, is manifested through the High Priestess's wisdom.</p>"
 		},
 		{
 			"name": "The Empress",
@@ -174,7 +176,8 @@ var M = {
 			"no": "III",
 			"img": "03.jpg",
 			"tags": [],
-			"description": ""
+			"description": "",
+			"details:": "<p>Seated majestically on her throne is a mature and beautiful woman. She is pregnant and serene, and all about her, the Earth is resplendent with the growth of summer. Crowned with a diadem of stars and carrying a golden sceptre, she is indeed the Great Mother, the Earth Goddess in manifestation. </p>"
 		},
 		{
 			"name": "The Emperor",
@@ -182,7 +185,8 @@ var M = {
 			"no": "IV",
 			"img": "04.jpg",
 			"tags": [],
-			"description": ""
+			"description": "",
+			"details:": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ut dui sit amet diam dignissim dapibus. Nulla eros mauris, commodo ut arcu ac, semper accumsan metus. Sed non dignissim tellus. Quisque facilisis purus enim, in laoreet dui bibendum quis. Duis tincidunt gravida mi vitae convallis. Maecenas ut nulla imperdiet ipsum lacinia ultrices a eget diam. Sed elementum leo quis tortor scelerisque ornare. Donec posuere tortor ut pellentesque vehicula. Aliquam erat nunc, luctus eget lacus nec, hendrerit blandit massa. Sed egestas nulla in felis ultrices cursus.</p><p>In purus tortor, malesuada ac egestas quis, finibus sit amet ipsum. Cras mattis maximus massa tempor semper. Phasellus non justo egestas nunc pulvinar dignissim vitae a massa. Aenean eleifend tortor a tincidunt tempor. Curabitur augue libero, venenatis id metus eu, pellentesque dictum urna. Proin posuere, leo vel sagittis bibendum, nulla est hendrerit orci, vel lacinia risus eros nec nisi. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus lacinia felis ut congue gravida. Nam at semper mi, a rutrum erat. Morbi quis sem non enim tristique pulvinar. Ut libero massa, tempus a metus a, consequat efficitur quam. Donec a dolor iaculis, imperdiet felis in, pretium massa. Sed et efficitur libero.</p>"
 		},
 		{
 			"name": "The Hierophant",
@@ -190,7 +194,8 @@ var M = {
 			"no": "V",
 			"img": "05.jpg",
 			"tags": [],
-			"description": ""
+			"description": "",
+			"details:": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ut dui sit amet diam dignissim dapibus. Nulla eros mauris, commodo ut arcu ac, semper accumsan metus. Sed non dignissim tellus. Quisque facilisis purus enim, in laoreet dui bibendum quis. Duis tincidunt gravida mi vitae convallis. Maecenas ut nulla imperdiet ipsum lacinia ultrices a eget diam. Sed elementum leo quis tortor scelerisque ornare. Donec posuere tortor ut pellentesque vehicula. Aliquam erat nunc, luctus eget lacus nec, hendrerit blandit massa. Sed egestas nulla in felis ultrices cursus.</p><p>In purus tortor, malesuada ac egestas quis, finibus sit amet ipsum. Cras mattis maximus massa tempor semper. Phasellus non justo egestas nunc pulvinar dignissim vitae a massa. Aenean eleifend tortor a tincidunt tempor. Curabitur augue libero, venenatis id metus eu, pellentesque dictum urna. Proin posuere, leo vel sagittis bibendum, nulla est hendrerit orci, vel lacinia risus eros nec nisi. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus lacinia felis ut congue gravida. Nam at semper mi, a rutrum erat. Morbi quis sem non enim tristique pulvinar. Ut libero massa, tempus a metus a, consequat efficitur quam. Donec a dolor iaculis, imperdiet felis in, pretium massa. Sed et efficitur libero.</p>"
 		},
 		{
 			"name": "The Lovers",
@@ -198,7 +203,8 @@ var M = {
 			"no": "VI",
 			"img": "06.jpg",
 			"tags": [],
-			"description": ""
+			"description": "",
+			"details:": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ut dui sit amet diam dignissim dapibus. Nulla eros mauris, commodo ut arcu ac, semper accumsan metus. Sed non dignissim tellus. Quisque facilisis purus enim, in laoreet dui bibendum quis. Duis tincidunt gravida mi vitae convallis. Maecenas ut nulla imperdiet ipsum lacinia ultrices a eget diam. Sed elementum leo quis tortor scelerisque ornare. Donec posuere tortor ut pellentesque vehicula. Aliquam erat nunc, luctus eget lacus nec, hendrerit blandit massa. Sed egestas nulla in felis ultrices cursus.</p><p>In purus tortor, malesuada ac egestas quis, finibus sit amet ipsum. Cras mattis maximus massa tempor semper. Phasellus non justo egestas nunc pulvinar dignissim vitae a massa. Aenean eleifend tortor a tincidunt tempor. Curabitur augue libero, venenatis id metus eu, pellentesque dictum urna. Proin posuere, leo vel sagittis bibendum, nulla est hendrerit orci, vel lacinia risus eros nec nisi. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus lacinia felis ut congue gravida. Nam at semper mi, a rutrum erat. Morbi quis sem non enim tristique pulvinar. Ut libero massa, tempus a metus a, consequat efficitur quam. Donec a dolor iaculis, imperdiet felis in, pretium massa. Sed et efficitur libero.</p>"
 		},
 		{
 			"name": "The Chariot",
@@ -206,7 +212,8 @@ var M = {
 			"no": "VII",
 			"img": "07.jpg",
 			"tags": [],
-			"description": ""
+			"description": "",
+			"details:": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ut dui sit amet diam dignissim dapibus. Nulla eros mauris, commodo ut arcu ac, semper accumsan metus. Sed non dignissim tellus. Quisque facilisis purus enim, in laoreet dui bibendum quis. Duis tincidunt gravida mi vitae convallis. Maecenas ut nulla imperdiet ipsum lacinia ultrices a eget diam. Sed elementum leo quis tortor scelerisque ornare. Donec posuere tortor ut pellentesque vehicula. Aliquam erat nunc, luctus eget lacus nec, hendrerit blandit massa. Sed egestas nulla in felis ultrices cursus.</p><p>In purus tortor, malesuada ac egestas quis, finibus sit amet ipsum. Cras mattis maximus massa tempor semper. Phasellus non justo egestas nunc pulvinar dignissim vitae a massa. Aenean eleifend tortor a tincidunt tempor. Curabitur augue libero, venenatis id metus eu, pellentesque dictum urna. Proin posuere, leo vel sagittis bibendum, nulla est hendrerit orci, vel lacinia risus eros nec nisi. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus lacinia felis ut congue gravida. Nam at semper mi, a rutrum erat. Morbi quis sem non enim tristique pulvinar. Ut libero massa, tempus a metus a, consequat efficitur quam. Donec a dolor iaculis, imperdiet felis in, pretium massa. Sed et efficitur libero.</p>"
 		},
 		{
 			"name": "The Strength",
@@ -214,7 +221,8 @@ var M = {
 			"no": "VIII",
 			"img": "08.jpg",
 			"tags": [],
-			"description": ""
+			"description": "",
+			"details:": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ut dui sit amet diam dignissim dapibus. Nulla eros mauris, commodo ut arcu ac, semper accumsan metus. Sed non dignissim tellus. Quisque facilisis purus enim, in laoreet dui bibendum quis. Duis tincidunt gravida mi vitae convallis. Maecenas ut nulla imperdiet ipsum lacinia ultrices a eget diam. Sed elementum leo quis tortor scelerisque ornare. Donec posuere tortor ut pellentesque vehicula. Aliquam erat nunc, luctus eget lacus nec, hendrerit blandit massa. Sed egestas nulla in felis ultrices cursus.</p><p>In purus tortor, malesuada ac egestas quis, finibus sit amet ipsum. Cras mattis maximus massa tempor semper. Phasellus non justo egestas nunc pulvinar dignissim vitae a massa. Aenean eleifend tortor a tincidunt tempor. Curabitur augue libero, venenatis id metus eu, pellentesque dictum urna. Proin posuere, leo vel sagittis bibendum, nulla est hendrerit orci, vel lacinia risus eros nec nisi. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus lacinia felis ut congue gravida. Nam at semper mi, a rutrum erat. Morbi quis sem non enim tristique pulvinar. Ut libero massa, tempus a metus a, consequat efficitur quam. Donec a dolor iaculis, imperdiet felis in, pretium massa. Sed et efficitur libero.</p>"
 		},
 		{
 			"name": "The Hermit",
@@ -222,7 +230,8 @@ var M = {
 			"no": "IX",
 			"img": "09.jpg",
 			"tags": [],
-			"description": ""
+			"description": "",
+			"details:": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ut dui sit amet diam dignissim dapibus. Nulla eros mauris, commodo ut arcu ac, semper accumsan metus. Sed non dignissim tellus. Quisque facilisis purus enim, in laoreet dui bibendum quis. Duis tincidunt gravida mi vitae convallis. Maecenas ut nulla imperdiet ipsum lacinia ultrices a eget diam. Sed elementum leo quis tortor scelerisque ornare. Donec posuere tortor ut pellentesque vehicula. Aliquam erat nunc, luctus eget lacus nec, hendrerit blandit massa. Sed egestas nulla in felis ultrices cursus.</p><p>In purus tortor, malesuada ac egestas quis, finibus sit amet ipsum. Cras mattis maximus massa tempor semper. Phasellus non justo egestas nunc pulvinar dignissim vitae a massa. Aenean eleifend tortor a tincidunt tempor. Curabitur augue libero, venenatis id metus eu, pellentesque dictum urna. Proin posuere, leo vel sagittis bibendum, nulla est hendrerit orci, vel lacinia risus eros nec nisi. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus lacinia felis ut congue gravida. Nam at semper mi, a rutrum erat. Morbi quis sem non enim tristique pulvinar. Ut libero massa, tempus a metus a, consequat efficitur quam. Donec a dolor iaculis, imperdiet felis in, pretium massa. Sed et efficitur libero.</p>"
 		},
 		{
 			"name": "The Wheel of Fortune",
@@ -230,7 +239,8 @@ var M = {
 			"no": "X",
 			"img": "10.jpg",
 			"tags": [],
-			"description": ""
+			"description": "",
+			"details:": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ut dui sit amet diam dignissim dapibus. Nulla eros mauris, commodo ut arcu ac, semper accumsan metus. Sed non dignissim tellus. Quisque facilisis purus enim, in laoreet dui bibendum quis. Duis tincidunt gravida mi vitae convallis. Maecenas ut nulla imperdiet ipsum lacinia ultrices a eget diam. Sed elementum leo quis tortor scelerisque ornare. Donec posuere tortor ut pellentesque vehicula. Aliquam erat nunc, luctus eget lacus nec, hendrerit blandit massa. Sed egestas nulla in felis ultrices cursus.</p><p>In purus tortor, malesuada ac egestas quis, finibus sit amet ipsum. Cras mattis maximus massa tempor semper. Phasellus non justo egestas nunc pulvinar dignissim vitae a massa. Aenean eleifend tortor a tincidunt tempor. Curabitur augue libero, venenatis id metus eu, pellentesque dictum urna. Proin posuere, leo vel sagittis bibendum, nulla est hendrerit orci, vel lacinia risus eros nec nisi. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus lacinia felis ut congue gravida. Nam at semper mi, a rutrum erat. Morbi quis sem non enim tristique pulvinar. Ut libero massa, tempus a metus a, consequat efficitur quam. Donec a dolor iaculis, imperdiet felis in, pretium massa. Sed et efficitur libero.</p>"
 		},
 		{
 			"name": "Justice",
@@ -238,7 +248,8 @@ var M = {
 			"no": "XI",
 			"img": "11.jpg",
 			"tags": [],
-			"description": ""
+			"description": "",
+			"details:": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ut dui sit amet diam dignissim dapibus. Nulla eros mauris, commodo ut arcu ac, semper accumsan metus. Sed non dignissim tellus. Quisque facilisis purus enim, in laoreet dui bibendum quis. Duis tincidunt gravida mi vitae convallis. Maecenas ut nulla imperdiet ipsum lacinia ultrices a eget diam. Sed elementum leo quis tortor scelerisque ornare. Donec posuere tortor ut pellentesque vehicula. Aliquam erat nunc, luctus eget lacus nec, hendrerit blandit massa. Sed egestas nulla in felis ultrices cursus.</p><p>In purus tortor, malesuada ac egestas quis, finibus sit amet ipsum. Cras mattis maximus massa tempor semper. Phasellus non justo egestas nunc pulvinar dignissim vitae a massa. Aenean eleifend tortor a tincidunt tempor. Curabitur augue libero, venenatis id metus eu, pellentesque dictum urna. Proin posuere, leo vel sagittis bibendum, nulla est hendrerit orci, vel lacinia risus eros nec nisi. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus lacinia felis ut congue gravida. Nam at semper mi, a rutrum erat. Morbi quis sem non enim tristique pulvinar. Ut libero massa, tempus a metus a, consequat efficitur quam. Donec a dolor iaculis, imperdiet felis in, pretium massa. Sed et efficitur libero.</p>"
 		},
 		{
 			"name": "The Hanged Man",
@@ -246,7 +257,8 @@ var M = {
 			"no": "XII",
 			"img": "12.jpg",
 			"tags": [],
-			"description": ""
+			"description": "",
+			"details:": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ut dui sit amet diam dignissim dapibus. Nulla eros mauris, commodo ut arcu ac, semper accumsan metus. Sed non dignissim tellus. Quisque facilisis purus enim, in laoreet dui bibendum quis. Duis tincidunt gravida mi vitae convallis. Maecenas ut nulla imperdiet ipsum lacinia ultrices a eget diam. Sed elementum leo quis tortor scelerisque ornare. Donec posuere tortor ut pellentesque vehicula. Aliquam erat nunc, luctus eget lacus nec, hendrerit blandit massa. Sed egestas nulla in felis ultrices cursus.</p><p>In purus tortor, malesuada ac egestas quis, finibus sit amet ipsum. Cras mattis maximus massa tempor semper. Phasellus non justo egestas nunc pulvinar dignissim vitae a massa. Aenean eleifend tortor a tincidunt tempor. Curabitur augue libero, venenatis id metus eu, pellentesque dictum urna. Proin posuere, leo vel sagittis bibendum, nulla est hendrerit orci, vel lacinia risus eros nec nisi. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus lacinia felis ut congue gravida. Nam at semper mi, a rutrum erat. Morbi quis sem non enim tristique pulvinar. Ut libero massa, tempus a metus a, consequat efficitur quam. Donec a dolor iaculis, imperdiet felis in, pretium massa. Sed et efficitur libero.</p>"
 		},
 		{
 			"name": "Death",
@@ -254,7 +266,8 @@ var M = {
 			"no": "XIII",
 			"img": "13.jpg",
 			"tags": [],
-			"description": ""
+			"description": "",
+			"details:": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ut dui sit amet diam dignissim dapibus. Nulla eros mauris, commodo ut arcu ac, semper accumsan metus. Sed non dignissim tellus. Quisque facilisis purus enim, in laoreet dui bibendum quis. Duis tincidunt gravida mi vitae convallis. Maecenas ut nulla imperdiet ipsum lacinia ultrices a eget diam. Sed elementum leo quis tortor scelerisque ornare. Donec posuere tortor ut pellentesque vehicula. Aliquam erat nunc, luctus eget lacus nec, hendrerit blandit massa. Sed egestas nulla in felis ultrices cursus.</p><p>In purus tortor, malesuada ac egestas quis, finibus sit amet ipsum. Cras mattis maximus massa tempor semper. Phasellus non justo egestas nunc pulvinar dignissim vitae a massa. Aenean eleifend tortor a tincidunt tempor. Curabitur augue libero, venenatis id metus eu, pellentesque dictum urna. Proin posuere, leo vel sagittis bibendum, nulla est hendrerit orci, vel lacinia risus eros nec nisi. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus lacinia felis ut congue gravida. Nam at semper mi, a rutrum erat. Morbi quis sem non enim tristique pulvinar. Ut libero massa, tempus a metus a, consequat efficitur quam. Donec a dolor iaculis, imperdiet felis in, pretium massa. Sed et efficitur libero.</p>"
 		},
 		{
 			"name": "Temperance",
@@ -262,7 +275,8 @@ var M = {
 			"no": "XIV",
 			"img": "14.jpg",
 			"tags": [],
-			"description": ""
+			"description": "",
+			"details:": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ut dui sit amet diam dignissim dapibus. Nulla eros mauris, commodo ut arcu ac, semper accumsan metus. Sed non dignissim tellus. Quisque facilisis purus enim, in laoreet dui bibendum quis. Duis tincidunt gravida mi vitae convallis. Maecenas ut nulla imperdiet ipsum lacinia ultrices a eget diam. Sed elementum leo quis tortor scelerisque ornare. Donec posuere tortor ut pellentesque vehicula. Aliquam erat nunc, luctus eget lacus nec, hendrerit blandit massa. Sed egestas nulla in felis ultrices cursus.</p><p>In purus tortor, malesuada ac egestas quis, finibus sit amet ipsum. Cras mattis maximus massa tempor semper. Phasellus non justo egestas nunc pulvinar dignissim vitae a massa. Aenean eleifend tortor a tincidunt tempor. Curabitur augue libero, venenatis id metus eu, pellentesque dictum urna. Proin posuere, leo vel sagittis bibendum, nulla est hendrerit orci, vel lacinia risus eros nec nisi. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus lacinia felis ut congue gravida. Nam at semper mi, a rutrum erat. Morbi quis sem non enim tristique pulvinar. Ut libero massa, tempus a metus a, consequat efficitur quam. Donec a dolor iaculis, imperdiet felis in, pretium massa. Sed et efficitur libero.</p>"
 		},
 		{
 			"name": "The Devil",
@@ -270,7 +284,8 @@ var M = {
 			"no": "XV",
 			"img": "15.jpg",
 			"tags": [],
-			"description": ""
+			"description": "",
+			"details:": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ut dui sit amet diam dignissim dapibus. Nulla eros mauris, commodo ut arcu ac, semper accumsan metus. Sed non dignissim tellus. Quisque facilisis purus enim, in laoreet dui bibendum quis. Duis tincidunt gravida mi vitae convallis. Maecenas ut nulla imperdiet ipsum lacinia ultrices a eget diam. Sed elementum leo quis tortor scelerisque ornare. Donec posuere tortor ut pellentesque vehicula. Aliquam erat nunc, luctus eget lacus nec, hendrerit blandit massa. Sed egestas nulla in felis ultrices cursus.</p><p>In purus tortor, malesuada ac egestas quis, finibus sit amet ipsum. Cras mattis maximus massa tempor semper. Phasellus non justo egestas nunc pulvinar dignissim vitae a massa. Aenean eleifend tortor a tincidunt tempor. Curabitur augue libero, venenatis id metus eu, pellentesque dictum urna. Proin posuere, leo vel sagittis bibendum, nulla est hendrerit orci, vel lacinia risus eros nec nisi. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus lacinia felis ut congue gravida. Nam at semper mi, a rutrum erat. Morbi quis sem non enim tristique pulvinar. Ut libero massa, tempus a metus a, consequat efficitur quam. Donec a dolor iaculis, imperdiet felis in, pretium massa. Sed et efficitur libero.</p>"
 		},
 		{
 			"name": "The Tower",
@@ -278,7 +293,8 @@ var M = {
 			"no": "XVI",
 			"img": "16.jpg",
 			"tags": [],
-			"description": ""
+			"description": "",
+			"details:": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ut dui sit amet diam dignissim dapibus. Nulla eros mauris, commodo ut arcu ac, semper accumsan metus. Sed non dignissim tellus. Quisque facilisis purus enim, in laoreet dui bibendum quis. Duis tincidunt gravida mi vitae convallis. Maecenas ut nulla imperdiet ipsum lacinia ultrices a eget diam. Sed elementum leo quis tortor scelerisque ornare. Donec posuere tortor ut pellentesque vehicula. Aliquam erat nunc, luctus eget lacus nec, hendrerit blandit massa. Sed egestas nulla in felis ultrices cursus.</p><p>In purus tortor, malesuada ac egestas quis, finibus sit amet ipsum. Cras mattis maximus massa tempor semper. Phasellus non justo egestas nunc pulvinar dignissim vitae a massa. Aenean eleifend tortor a tincidunt tempor. Curabitur augue libero, venenatis id metus eu, pellentesque dictum urna. Proin posuere, leo vel sagittis bibendum, nulla est hendrerit orci, vel lacinia risus eros nec nisi. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus lacinia felis ut congue gravida. Nam at semper mi, a rutrum erat. Morbi quis sem non enim tristique pulvinar. Ut libero massa, tempus a metus a, consequat efficitur quam. Donec a dolor iaculis, imperdiet felis in, pretium massa. Sed et efficitur libero.</p>"
 		},
 		{
 			"name": "The Star",
@@ -286,7 +302,8 @@ var M = {
 			"no": "XVII",
 			"img": "17.jpg",
 			"tags": [],
-			"description": ""
+			"description": "",
+			"details:": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ut dui sit amet diam dignissim dapibus. Nulla eros mauris, commodo ut arcu ac, semper accumsan metus. Sed non dignissim tellus. Quisque facilisis purus enim, in laoreet dui bibendum quis. Duis tincidunt gravida mi vitae convallis. Maecenas ut nulla imperdiet ipsum lacinia ultrices a eget diam. Sed elementum leo quis tortor scelerisque ornare. Donec posuere tortor ut pellentesque vehicula. Aliquam erat nunc, luctus eget lacus nec, hendrerit blandit massa. Sed egestas nulla in felis ultrices cursus.</p><p>In purus tortor, malesuada ac egestas quis, finibus sit amet ipsum. Cras mattis maximus massa tempor semper. Phasellus non justo egestas nunc pulvinar dignissim vitae a massa. Aenean eleifend tortor a tincidunt tempor. Curabitur augue libero, venenatis id metus eu, pellentesque dictum urna. Proin posuere, leo vel sagittis bibendum, nulla est hendrerit orci, vel lacinia risus eros nec nisi. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus lacinia felis ut congue gravida. Nam at semper mi, a rutrum erat. Morbi quis sem non enim tristique pulvinar. Ut libero massa, tempus a metus a, consequat efficitur quam. Donec a dolor iaculis, imperdiet felis in, pretium massa. Sed et efficitur libero.</p>"
 		},
 		{
 			"name": "The Moon",
@@ -294,7 +311,8 @@ var M = {
 			"no": "XVIII",
 			"img": "18.jpg",
 			"tags": [],
-			"description": ""
+			"description": "",
+			"details:": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ut dui sit amet diam dignissim dapibus. Nulla eros mauris, commodo ut arcu ac, semper accumsan metus. Sed non dignissim tellus. Quisque facilisis purus enim, in laoreet dui bibendum quis. Duis tincidunt gravida mi vitae convallis. Maecenas ut nulla imperdiet ipsum lacinia ultrices a eget diam. Sed elementum leo quis tortor scelerisque ornare. Donec posuere tortor ut pellentesque vehicula. Aliquam erat nunc, luctus eget lacus nec, hendrerit blandit massa. Sed egestas nulla in felis ultrices cursus.</p><p>In purus tortor, malesuada ac egestas quis, finibus sit amet ipsum. Cras mattis maximus massa tempor semper. Phasellus non justo egestas nunc pulvinar dignissim vitae a massa. Aenean eleifend tortor a tincidunt tempor. Curabitur augue libero, venenatis id metus eu, pellentesque dictum urna. Proin posuere, leo vel sagittis bibendum, nulla est hendrerit orci, vel lacinia risus eros nec nisi. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus lacinia felis ut congue gravida. Nam at semper mi, a rutrum erat. Morbi quis sem non enim tristique pulvinar. Ut libero massa, tempus a metus a, consequat efficitur quam. Donec a dolor iaculis, imperdiet felis in, pretium massa. Sed et efficitur libero.</p>"
 		},
 		{
 			"name": "The Sun",
@@ -302,7 +320,8 @@ var M = {
 			"no": "XIX",
 			"img": "19.jpg",
 			"tags": [],
-			"description": ""
+			"description": "",
+			"details:": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ut dui sit amet diam dignissim dapibus. Nulla eros mauris, commodo ut arcu ac, semper accumsan metus. Sed non dignissim tellus. Quisque facilisis purus enim, in laoreet dui bibendum quis. Duis tincidunt gravida mi vitae convallis. Maecenas ut nulla imperdiet ipsum lacinia ultrices a eget diam. Sed elementum leo quis tortor scelerisque ornare. Donec posuere tortor ut pellentesque vehicula. Aliquam erat nunc, luctus eget lacus nec, hendrerit blandit massa. Sed egestas nulla in felis ultrices cursus.</p><p>In purus tortor, malesuada ac egestas quis, finibus sit amet ipsum. Cras mattis maximus massa tempor semper. Phasellus non justo egestas nunc pulvinar dignissim vitae a massa. Aenean eleifend tortor a tincidunt tempor. Curabitur augue libero, venenatis id metus eu, pellentesque dictum urna. Proin posuere, leo vel sagittis bibendum, nulla est hendrerit orci, vel lacinia risus eros nec nisi. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus lacinia felis ut congue gravida. Nam at semper mi, a rutrum erat. Morbi quis sem non enim tristique pulvinar. Ut libero massa, tempus a metus a, consequat efficitur quam. Donec a dolor iaculis, imperdiet felis in, pretium massa. Sed et efficitur libero.</p>"
 		},
 		{
 			"name": "Judgment",
@@ -310,7 +329,8 @@ var M = {
 			"no": "XX",
 			"img": "20.jpg",
 			"tags": [],
-			"description": ""
+			"description": "",
+			"details:": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ut dui sit amet diam dignissim dapibus. Nulla eros mauris, commodo ut arcu ac, semper accumsan metus. Sed non dignissim tellus. Quisque facilisis purus enim, in laoreet dui bibendum quis. Duis tincidunt gravida mi vitae convallis. Maecenas ut nulla imperdiet ipsum lacinia ultrices a eget diam. Sed elementum leo quis tortor scelerisque ornare. Donec posuere tortor ut pellentesque vehicula. Aliquam erat nunc, luctus eget lacus nec, hendrerit blandit massa. Sed egestas nulla in felis ultrices cursus.</p><p>In purus tortor, malesuada ac egestas quis, finibus sit amet ipsum. Cras mattis maximus massa tempor semper. Phasellus non justo egestas nunc pulvinar dignissim vitae a massa. Aenean eleifend tortor a tincidunt tempor. Curabitur augue libero, venenatis id metus eu, pellentesque dictum urna. Proin posuere, leo vel sagittis bibendum, nulla est hendrerit orci, vel lacinia risus eros nec nisi. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus lacinia felis ut congue gravida. Nam at semper mi, a rutrum erat. Morbi quis sem non enim tristique pulvinar. Ut libero massa, tempus a metus a, consequat efficitur quam. Donec a dolor iaculis, imperdiet felis in, pretium massa. Sed et efficitur libero.</p>"
 		},
 		{
 			"name": "The World",
@@ -318,7 +338,8 @@ var M = {
 			"no": "XXI",
 			"img": "21.jpg",
 			"tags": [],
-			"description": ""
+			"description": "",
+			"details:": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ut dui sit amet diam dignissim dapibus. Nulla eros mauris, commodo ut arcu ac, semper accumsan metus. Sed non dignissim tellus. Quisque facilisis purus enim, in laoreet dui bibendum quis. Duis tincidunt gravida mi vitae convallis. Maecenas ut nulla imperdiet ipsum lacinia ultrices a eget diam. Sed elementum leo quis tortor scelerisque ornare. Donec posuere tortor ut pellentesque vehicula. Aliquam erat nunc, luctus eget lacus nec, hendrerit blandit massa. Sed egestas nulla in felis ultrices cursus.</p><p>In purus tortor, malesuada ac egestas quis, finibus sit amet ipsum. Cras mattis maximus massa tempor semper. Phasellus non justo egestas nunc pulvinar dignissim vitae a massa. Aenean eleifend tortor a tincidunt tempor. Curabitur augue libero, venenatis id metus eu, pellentesque dictum urna. Proin posuere, leo vel sagittis bibendum, nulla est hendrerit orci, vel lacinia risus eros nec nisi. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus lacinia felis ut congue gravida. Nam at semper mi, a rutrum erat. Morbi quis sem non enim tristique pulvinar. Ut libero massa, tempus a metus a, consequat efficitur quam. Donec a dolor iaculis, imperdiet felis in, pretium massa. Sed et efficitur libero.</p>"
 		},
 		{
 			"name": "Ace of Wands",
@@ -326,7 +347,8 @@ var M = {
 			"no": "",
 			"img": "22.jpg",
 			"tags": [],
-			"description": ""
+			"description": "",
+			"details:": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ut dui sit amet diam dignissim dapibus. Nulla eros mauris, commodo ut arcu ac, semper accumsan metus. Sed non dignissim tellus. Quisque facilisis purus enim, in laoreet dui bibendum quis. Duis tincidunt gravida mi vitae convallis. Maecenas ut nulla imperdiet ipsum lacinia ultrices a eget diam. Sed elementum leo quis tortor scelerisque ornare. Donec posuere tortor ut pellentesque vehicula. Aliquam erat nunc, luctus eget lacus nec, hendrerit blandit massa. Sed egestas nulla in felis ultrices cursus.</p><p>In purus tortor, malesuada ac egestas quis, finibus sit amet ipsum. Cras mattis maximus massa tempor semper. Phasellus non justo egestas nunc pulvinar dignissim vitae a massa. Aenean eleifend tortor a tincidunt tempor. Curabitur augue libero, venenatis id metus eu, pellentesque dictum urna. Proin posuere, leo vel sagittis bibendum, nulla est hendrerit orci, vel lacinia risus eros nec nisi. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus lacinia felis ut congue gravida. Nam at semper mi, a rutrum erat. Morbi quis sem non enim tristique pulvinar. Ut libero massa, tempus a metus a, consequat efficitur quam. Donec a dolor iaculis, imperdiet felis in, pretium massa. Sed et efficitur libero.</p>"
 		},
 		{
 			"name": "Two of Wands",
@@ -334,7 +356,8 @@ var M = {
 			"no": "II",
 			"img": "23.jpg",
 			"tags": [],
-			"description": ""
+			"description": "",
+			"details:": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ut dui sit amet diam dignissim dapibus. Nulla eros mauris, commodo ut arcu ac, semper accumsan metus. Sed non dignissim tellus. Quisque facilisis purus enim, in laoreet dui bibendum quis. Duis tincidunt gravida mi vitae convallis. Maecenas ut nulla imperdiet ipsum lacinia ultrices a eget diam. Sed elementum leo quis tortor scelerisque ornare. Donec posuere tortor ut pellentesque vehicula. Aliquam erat nunc, luctus eget lacus nec, hendrerit blandit massa. Sed egestas nulla in felis ultrices cursus.</p><p>In purus tortor, malesuada ac egestas quis, finibus sit amet ipsum. Cras mattis maximus massa tempor semper. Phasellus non justo egestas nunc pulvinar dignissim vitae a massa. Aenean eleifend tortor a tincidunt tempor. Curabitur augue libero, venenatis id metus eu, pellentesque dictum urna. Proin posuere, leo vel sagittis bibendum, nulla est hendrerit orci, vel lacinia risus eros nec nisi. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus lacinia felis ut congue gravida. Nam at semper mi, a rutrum erat. Morbi quis sem non enim tristique pulvinar. Ut libero massa, tempus a metus a, consequat efficitur quam. Donec a dolor iaculis, imperdiet felis in, pretium massa. Sed et efficitur libero.</p>"
 		},
 		{
 			"name": "Three of Wands",
@@ -342,7 +365,8 @@ var M = {
 			"no": "III",
 			"img": "24.jpg",
 			"tags": [],
-			"description": ""
+			"description": "",
+			"details:": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ut dui sit amet diam dignissim dapibus. Nulla eros mauris, commodo ut arcu ac, semper accumsan metus. Sed non dignissim tellus. Quisque facilisis purus enim, in laoreet dui bibendum quis. Duis tincidunt gravida mi vitae convallis. Maecenas ut nulla imperdiet ipsum lacinia ultrices a eget diam. Sed elementum leo quis tortor scelerisque ornare. Donec posuere tortor ut pellentesque vehicula. Aliquam erat nunc, luctus eget lacus nec, hendrerit blandit massa. Sed egestas nulla in felis ultrices cursus.</p><p>In purus tortor, malesuada ac egestas quis, finibus sit amet ipsum. Cras mattis maximus massa tempor semper. Phasellus non justo egestas nunc pulvinar dignissim vitae a massa. Aenean eleifend tortor a tincidunt tempor. Curabitur augue libero, venenatis id metus eu, pellentesque dictum urna. Proin posuere, leo vel sagittis bibendum, nulla est hendrerit orci, vel lacinia risus eros nec nisi. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus lacinia felis ut congue gravida. Nam at semper mi, a rutrum erat. Morbi quis sem non enim tristique pulvinar. Ut libero massa, tempus a metus a, consequat efficitur quam. Donec a dolor iaculis, imperdiet felis in, pretium massa. Sed et efficitur libero.</p>"
 		},
 		{
 			"name": "Four of Wands",
@@ -350,7 +374,8 @@ var M = {
 			"no": "IV",
 			"img": "25.jpg",
 			"tags": [],
-			"description": ""
+			"description": "",
+			"details:": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ut dui sit amet diam dignissim dapibus. Nulla eros mauris, commodo ut arcu ac, semper accumsan metus. Sed non dignissim tellus. Quisque facilisis purus enim, in laoreet dui bibendum quis. Duis tincidunt gravida mi vitae convallis. Maecenas ut nulla imperdiet ipsum lacinia ultrices a eget diam. Sed elementum leo quis tortor scelerisque ornare. Donec posuere tortor ut pellentesque vehicula. Aliquam erat nunc, luctus eget lacus nec, hendrerit blandit massa. Sed egestas nulla in felis ultrices cursus.</p><p>In purus tortor, malesuada ac egestas quis, finibus sit amet ipsum. Cras mattis maximus massa tempor semper. Phasellus non justo egestas nunc pulvinar dignissim vitae a massa. Aenean eleifend tortor a tincidunt tempor. Curabitur augue libero, venenatis id metus eu, pellentesque dictum urna. Proin posuere, leo vel sagittis bibendum, nulla est hendrerit orci, vel lacinia risus eros nec nisi. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus lacinia felis ut congue gravida. Nam at semper mi, a rutrum erat. Morbi quis sem non enim tristique pulvinar. Ut libero massa, tempus a metus a, consequat efficitur quam. Donec a dolor iaculis, imperdiet felis in, pretium massa. Sed et efficitur libero.</p>"
 		},
 		{
 			"name": "Five of Wands",
@@ -358,7 +383,8 @@ var M = {
 			"no": "V",
 			"img": "26.jpg",
 			"tags": [],
-			"description": ""
+			"description": "",
+			"details:": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ut dui sit amet diam dignissim dapibus. Nulla eros mauris, commodo ut arcu ac, semper accumsan metus. Sed non dignissim tellus. Quisque facilisis purus enim, in laoreet dui bibendum quis. Duis tincidunt gravida mi vitae convallis. Maecenas ut nulla imperdiet ipsum lacinia ultrices a eget diam. Sed elementum leo quis tortor scelerisque ornare. Donec posuere tortor ut pellentesque vehicula. Aliquam erat nunc, luctus eget lacus nec, hendrerit blandit massa. Sed egestas nulla in felis ultrices cursus.</p><p>In purus tortor, malesuada ac egestas quis, finibus sit amet ipsum. Cras mattis maximus massa tempor semper. Phasellus non justo egestas nunc pulvinar dignissim vitae a massa. Aenean eleifend tortor a tincidunt tempor. Curabitur augue libero, venenatis id metus eu, pellentesque dictum urna. Proin posuere, leo vel sagittis bibendum, nulla est hendrerit orci, vel lacinia risus eros nec nisi. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus lacinia felis ut congue gravida. Nam at semper mi, a rutrum erat. Morbi quis sem non enim tristique pulvinar. Ut libero massa, tempus a metus a, consequat efficitur quam. Donec a dolor iaculis, imperdiet felis in, pretium massa. Sed et efficitur libero.</p>"
 		},
 		{
 			"name": "Six of Wands",
@@ -366,7 +392,8 @@ var M = {
 			"no": "VI",
 			"img": "27.jpg",
 			"tags": [],
-			"description": ""
+			"description": "",
+			"details:": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ut dui sit amet diam dignissim dapibus. Nulla eros mauris, commodo ut arcu ac, semper accumsan metus. Sed non dignissim tellus. Quisque facilisis purus enim, in laoreet dui bibendum quis. Duis tincidunt gravida mi vitae convallis. Maecenas ut nulla imperdiet ipsum lacinia ultrices a eget diam. Sed elementum leo quis tortor scelerisque ornare. Donec posuere tortor ut pellentesque vehicula. Aliquam erat nunc, luctus eget lacus nec, hendrerit blandit massa. Sed egestas nulla in felis ultrices cursus.</p><p>In purus tortor, malesuada ac egestas quis, finibus sit amet ipsum. Cras mattis maximus massa tempor semper. Phasellus non justo egestas nunc pulvinar dignissim vitae a massa. Aenean eleifend tortor a tincidunt tempor. Curabitur augue libero, venenatis id metus eu, pellentesque dictum urna. Proin posuere, leo vel sagittis bibendum, nulla est hendrerit orci, vel lacinia risus eros nec nisi. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus lacinia felis ut congue gravida. Nam at semper mi, a rutrum erat. Morbi quis sem non enim tristique pulvinar. Ut libero massa, tempus a metus a, consequat efficitur quam. Donec a dolor iaculis, imperdiet felis in, pretium massa. Sed et efficitur libero.</p>"
 		},
 		{
 			"name": "Seven of Wands",
@@ -374,7 +401,8 @@ var M = {
 			"no": "VII",
 			"img": "28.jpg",
 			"tags": [],
-			"description": ""
+			"description": "",
+			"details:": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ut dui sit amet diam dignissim dapibus. Nulla eros mauris, commodo ut arcu ac, semper accumsan metus. Sed non dignissim tellus. Quisque facilisis purus enim, in laoreet dui bibendum quis. Duis tincidunt gravida mi vitae convallis. Maecenas ut nulla imperdiet ipsum lacinia ultrices a eget diam. Sed elementum leo quis tortor scelerisque ornare. Donec posuere tortor ut pellentesque vehicula. Aliquam erat nunc, luctus eget lacus nec, hendrerit blandit massa. Sed egestas nulla in felis ultrices cursus.</p><p>In purus tortor, malesuada ac egestas quis, finibus sit amet ipsum. Cras mattis maximus massa tempor semper. Phasellus non justo egestas nunc pulvinar dignissim vitae a massa. Aenean eleifend tortor a tincidunt tempor. Curabitur augue libero, venenatis id metus eu, pellentesque dictum urna. Proin posuere, leo vel sagittis bibendum, nulla est hendrerit orci, vel lacinia risus eros nec nisi. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus lacinia felis ut congue gravida. Nam at semper mi, a rutrum erat. Morbi quis sem non enim tristique pulvinar. Ut libero massa, tempus a metus a, consequat efficitur quam. Donec a dolor iaculis, imperdiet felis in, pretium massa. Sed et efficitur libero.</p>"
 		},
 		{
 			"name": "Eight of Wands",
@@ -382,7 +410,8 @@ var M = {
 			"no": "VIII",
 			"img": "29.jpg",
 			"tags": [],
-			"description": ""
+			"description": "",
+			"details:": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ut dui sit amet diam dignissim dapibus. Nulla eros mauris, commodo ut arcu ac, semper accumsan metus. Sed non dignissim tellus. Quisque facilisis purus enim, in laoreet dui bibendum quis. Duis tincidunt gravida mi vitae convallis. Maecenas ut nulla imperdiet ipsum lacinia ultrices a eget diam. Sed elementum leo quis tortor scelerisque ornare. Donec posuere tortor ut pellentesque vehicula. Aliquam erat nunc, luctus eget lacus nec, hendrerit blandit massa. Sed egestas nulla in felis ultrices cursus.</p><p>In purus tortor, malesuada ac egestas quis, finibus sit amet ipsum. Cras mattis maximus massa tempor semper. Phasellus non justo egestas nunc pulvinar dignissim vitae a massa. Aenean eleifend tortor a tincidunt tempor. Curabitur augue libero, venenatis id metus eu, pellentesque dictum urna. Proin posuere, leo vel sagittis bibendum, nulla est hendrerit orci, vel lacinia risus eros nec nisi. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus lacinia felis ut congue gravida. Nam at semper mi, a rutrum erat. Morbi quis sem non enim tristique pulvinar. Ut libero massa, tempus a metus a, consequat efficitur quam. Donec a dolor iaculis, imperdiet felis in, pretium massa. Sed et efficitur libero.</p>"
 		},
 		{
 			"name": "Nine of Wands",
@@ -390,7 +419,8 @@ var M = {
 			"no": "IX",
 			"img": "30.jpg",
 			"tags": [],
-			"description": ""
+			"description": "",
+			"details:": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ut dui sit amet diam dignissim dapibus. Nulla eros mauris, commodo ut arcu ac, semper accumsan metus. Sed non dignissim tellus. Quisque facilisis purus enim, in laoreet dui bibendum quis. Duis tincidunt gravida mi vitae convallis. Maecenas ut nulla imperdiet ipsum lacinia ultrices a eget diam. Sed elementum leo quis tortor scelerisque ornare. Donec posuere tortor ut pellentesque vehicula. Aliquam erat nunc, luctus eget lacus nec, hendrerit blandit massa. Sed egestas nulla in felis ultrices cursus.</p><p>In purus tortor, malesuada ac egestas quis, finibus sit amet ipsum. Cras mattis maximus massa tempor semper. Phasellus non justo egestas nunc pulvinar dignissim vitae a massa. Aenean eleifend tortor a tincidunt tempor. Curabitur augue libero, venenatis id metus eu, pellentesque dictum urna. Proin posuere, leo vel sagittis bibendum, nulla est hendrerit orci, vel lacinia risus eros nec nisi. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus lacinia felis ut congue gravida. Nam at semper mi, a rutrum erat. Morbi quis sem non enim tristique pulvinar. Ut libero massa, tempus a metus a, consequat efficitur quam. Donec a dolor iaculis, imperdiet felis in, pretium massa. Sed et efficitur libero.</p>"
 		},
 		{
 			"name": "Ten of Wands",
@@ -398,7 +428,8 @@ var M = {
 			"no": "X",
 			"img": "31.jpg",
 			"tags": [],
-			"description": ""
+			"description": "",
+			"details:": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ut dui sit amet diam dignissim dapibus. Nulla eros mauris, commodo ut arcu ac, semper accumsan metus. Sed non dignissim tellus. Quisque facilisis purus enim, in laoreet dui bibendum quis. Duis tincidunt gravida mi vitae convallis. Maecenas ut nulla imperdiet ipsum lacinia ultrices a eget diam. Sed elementum leo quis tortor scelerisque ornare. Donec posuere tortor ut pellentesque vehicula. Aliquam erat nunc, luctus eget lacus nec, hendrerit blandit massa. Sed egestas nulla in felis ultrices cursus.</p><p>In purus tortor, malesuada ac egestas quis, finibus sit amet ipsum. Cras mattis maximus massa tempor semper. Phasellus non justo egestas nunc pulvinar dignissim vitae a massa. Aenean eleifend tortor a tincidunt tempor. Curabitur augue libero, venenatis id metus eu, pellentesque dictum urna. Proin posuere, leo vel sagittis bibendum, nulla est hendrerit orci, vel lacinia risus eros nec nisi. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus lacinia felis ut congue gravida. Nam at semper mi, a rutrum erat. Morbi quis sem non enim tristique pulvinar. Ut libero massa, tempus a metus a, consequat efficitur quam. Donec a dolor iaculis, imperdiet felis in, pretium massa. Sed et efficitur libero.</p>"
 		},
 		{
 			"name": "Page of Wands",
@@ -406,7 +437,8 @@ var M = {
 			"no": "",
 			"img": "32.jpg",
 			"tags": [],
-			"description": ""
+			"description": "",
+			"details:": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ut dui sit amet diam dignissim dapibus. Nulla eros mauris, commodo ut arcu ac, semper accumsan metus. Sed non dignissim tellus. Quisque facilisis purus enim, in laoreet dui bibendum quis. Duis tincidunt gravida mi vitae convallis. Maecenas ut nulla imperdiet ipsum lacinia ultrices a eget diam. Sed elementum leo quis tortor scelerisque ornare. Donec posuere tortor ut pellentesque vehicula. Aliquam erat nunc, luctus eget lacus nec, hendrerit blandit massa. Sed egestas nulla in felis ultrices cursus.</p><p>In purus tortor, malesuada ac egestas quis, finibus sit amet ipsum. Cras mattis maximus massa tempor semper. Phasellus non justo egestas nunc pulvinar dignissim vitae a massa. Aenean eleifend tortor a tincidunt tempor. Curabitur augue libero, venenatis id metus eu, pellentesque dictum urna. Proin posuere, leo vel sagittis bibendum, nulla est hendrerit orci, vel lacinia risus eros nec nisi. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus lacinia felis ut congue gravida. Nam at semper mi, a rutrum erat. Morbi quis sem non enim tristique pulvinar. Ut libero massa, tempus a metus a, consequat efficitur quam. Donec a dolor iaculis, imperdiet felis in, pretium massa. Sed et efficitur libero.</p>"
 		},
 		{
 			"name": "Knight of Wands",
@@ -414,7 +446,8 @@ var M = {
 			"no": "",
 			"img": "33.jpg",
 			"tags": [],
-			"description": ""
+			"description": "",
+			"details:": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ut dui sit amet diam dignissim dapibus. Nulla eros mauris, commodo ut arcu ac, semper accumsan metus. Sed non dignissim tellus. Quisque facilisis purus enim, in laoreet dui bibendum quis. Duis tincidunt gravida mi vitae convallis. Maecenas ut nulla imperdiet ipsum lacinia ultrices a eget diam. Sed elementum leo quis tortor scelerisque ornare. Donec posuere tortor ut pellentesque vehicula. Aliquam erat nunc, luctus eget lacus nec, hendrerit blandit massa. Sed egestas nulla in felis ultrices cursus.</p><p>In purus tortor, malesuada ac egestas quis, finibus sit amet ipsum. Cras mattis maximus massa tempor semper. Phasellus non justo egestas nunc pulvinar dignissim vitae a massa. Aenean eleifend tortor a tincidunt tempor. Curabitur augue libero, venenatis id metus eu, pellentesque dictum urna. Proin posuere, leo vel sagittis bibendum, nulla est hendrerit orci, vel lacinia risus eros nec nisi. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus lacinia felis ut congue gravida. Nam at semper mi, a rutrum erat. Morbi quis sem non enim tristique pulvinar. Ut libero massa, tempus a metus a, consequat efficitur quam. Donec a dolor iaculis, imperdiet felis in, pretium massa. Sed et efficitur libero.</p>"
 		},
 		{
 			"name": "Queen of Wands",
@@ -422,7 +455,8 @@ var M = {
 			"no": "",
 			"img": "34.jpg",
 			"tags": [],
-			"description": ""
+			"description": "",
+			"details:": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ut dui sit amet diam dignissim dapibus. Nulla eros mauris, commodo ut arcu ac, semper accumsan metus. Sed non dignissim tellus. Quisque facilisis purus enim, in laoreet dui bibendum quis. Duis tincidunt gravida mi vitae convallis. Maecenas ut nulla imperdiet ipsum lacinia ultrices a eget diam. Sed elementum leo quis tortor scelerisque ornare. Donec posuere tortor ut pellentesque vehicula. Aliquam erat nunc, luctus eget lacus nec, hendrerit blandit massa. Sed egestas nulla in felis ultrices cursus.</p><p>In purus tortor, malesuada ac egestas quis, finibus sit amet ipsum. Cras mattis maximus massa tempor semper. Phasellus non justo egestas nunc pulvinar dignissim vitae a massa. Aenean eleifend tortor a tincidunt tempor. Curabitur augue libero, venenatis id metus eu, pellentesque dictum urna. Proin posuere, leo vel sagittis bibendum, nulla est hendrerit orci, vel lacinia risus eros nec nisi. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus lacinia felis ut congue gravida. Nam at semper mi, a rutrum erat. Morbi quis sem non enim tristique pulvinar. Ut libero massa, tempus a metus a, consequat efficitur quam. Donec a dolor iaculis, imperdiet felis in, pretium massa. Sed et efficitur libero.</p>"
 		},
 		{
 			"name": "King of Wands",
@@ -430,7 +464,8 @@ var M = {
 			"no": "",
 			"img": "35.jpg",
 			"tags": [],
-			"description": ""
+			"description": "",
+			"details:": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ut dui sit amet diam dignissim dapibus. Nulla eros mauris, commodo ut arcu ac, semper accumsan metus. Sed non dignissim tellus. Quisque facilisis purus enim, in laoreet dui bibendum quis. Duis tincidunt gravida mi vitae convallis. Maecenas ut nulla imperdiet ipsum lacinia ultrices a eget diam. Sed elementum leo quis tortor scelerisque ornare. Donec posuere tortor ut pellentesque vehicula. Aliquam erat nunc, luctus eget lacus nec, hendrerit blandit massa. Sed egestas nulla in felis ultrices cursus.</p><p>In purus tortor, malesuada ac egestas quis, finibus sit amet ipsum. Cras mattis maximus massa tempor semper. Phasellus non justo egestas nunc pulvinar dignissim vitae a massa. Aenean eleifend tortor a tincidunt tempor. Curabitur augue libero, venenatis id metus eu, pellentesque dictum urna. Proin posuere, leo vel sagittis bibendum, nulla est hendrerit orci, vel lacinia risus eros nec nisi. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus lacinia felis ut congue gravida. Nam at semper mi, a rutrum erat. Morbi quis sem non enim tristique pulvinar. Ut libero massa, tempus a metus a, consequat efficitur quam. Donec a dolor iaculis, imperdiet felis in, pretium massa. Sed et efficitur libero.</p>"
 		},
 		{
 			"name": "Ace of Cups",
@@ -438,7 +473,8 @@ var M = {
 			"no": "",
 			"img": "36.jpg",
 			"tags": [],
-			"description": ""
+			"description": "",
+			"details:": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ut dui sit amet diam dignissim dapibus. Nulla eros mauris, commodo ut arcu ac, semper accumsan metus. Sed non dignissim tellus. Quisque facilisis purus enim, in laoreet dui bibendum quis. Duis tincidunt gravida mi vitae convallis. Maecenas ut nulla imperdiet ipsum lacinia ultrices a eget diam. Sed elementum leo quis tortor scelerisque ornare. Donec posuere tortor ut pellentesque vehicula. Aliquam erat nunc, luctus eget lacus nec, hendrerit blandit massa. Sed egestas nulla in felis ultrices cursus.</p><p>In purus tortor, malesuada ac egestas quis, finibus sit amet ipsum. Cras mattis maximus massa tempor semper. Phasellus non justo egestas nunc pulvinar dignissim vitae a massa. Aenean eleifend tortor a tincidunt tempor. Curabitur augue libero, venenatis id metus eu, pellentesque dictum urna. Proin posuere, leo vel sagittis bibendum, nulla est hendrerit orci, vel lacinia risus eros nec nisi. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus lacinia felis ut congue gravida. Nam at semper mi, a rutrum erat. Morbi quis sem non enim tristique pulvinar. Ut libero massa, tempus a metus a, consequat efficitur quam. Donec a dolor iaculis, imperdiet felis in, pretium massa. Sed et efficitur libero.</p>"
 		},
 		{
 			"name": "Two of Cups",
@@ -446,7 +482,8 @@ var M = {
 			"no": "II",
 			"img": "37.jpg",
 			"tags": [],
-			"description": ""
+			"description": "",
+			"details:": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ut dui sit amet diam dignissim dapibus. Nulla eros mauris, commodo ut arcu ac, semper accumsan metus. Sed non dignissim tellus. Quisque facilisis purus enim, in laoreet dui bibendum quis. Duis tincidunt gravida mi vitae convallis. Maecenas ut nulla imperdiet ipsum lacinia ultrices a eget diam. Sed elementum leo quis tortor scelerisque ornare. Donec posuere tortor ut pellentesque vehicula. Aliquam erat nunc, luctus eget lacus nec, hendrerit blandit massa. Sed egestas nulla in felis ultrices cursus.</p><p>In purus tortor, malesuada ac egestas quis, finibus sit amet ipsum. Cras mattis maximus massa tempor semper. Phasellus non justo egestas nunc pulvinar dignissim vitae a massa. Aenean eleifend tortor a tincidunt tempor. Curabitur augue libero, venenatis id metus eu, pellentesque dictum urna. Proin posuere, leo vel sagittis bibendum, nulla est hendrerit orci, vel lacinia risus eros nec nisi. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus lacinia felis ut congue gravida. Nam at semper mi, a rutrum erat. Morbi quis sem non enim tristique pulvinar. Ut libero massa, tempus a metus a, consequat efficitur quam. Donec a dolor iaculis, imperdiet felis in, pretium massa. Sed et efficitur libero.</p>"
 		},
 		{
 			"name": "Three of Cups",
@@ -454,7 +491,8 @@ var M = {
 			"no": "III",
 			"img": "38.jpg",
 			"tags": [],
-			"description": ""
+			"description": "",
+			"details:": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ut dui sit amet diam dignissim dapibus. Nulla eros mauris, commodo ut arcu ac, semper accumsan metus. Sed non dignissim tellus. Quisque facilisis purus enim, in laoreet dui bibendum quis. Duis tincidunt gravida mi vitae convallis. Maecenas ut nulla imperdiet ipsum lacinia ultrices a eget diam. Sed elementum leo quis tortor scelerisque ornare. Donec posuere tortor ut pellentesque vehicula. Aliquam erat nunc, luctus eget lacus nec, hendrerit blandit massa. Sed egestas nulla in felis ultrices cursus.</p><p>In purus tortor, malesuada ac egestas quis, finibus sit amet ipsum. Cras mattis maximus massa tempor semper. Phasellus non justo egestas nunc pulvinar dignissim vitae a massa. Aenean eleifend tortor a tincidunt tempor. Curabitur augue libero, venenatis id metus eu, pellentesque dictum urna. Proin posuere, leo vel sagittis bibendum, nulla est hendrerit orci, vel lacinia risus eros nec nisi. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus lacinia felis ut congue gravida. Nam at semper mi, a rutrum erat. Morbi quis sem non enim tristique pulvinar. Ut libero massa, tempus a metus a, consequat efficitur quam. Donec a dolor iaculis, imperdiet felis in, pretium massa. Sed et efficitur libero.</p>"
 		},
 		{
 			"name": "Four of Cups",
@@ -462,7 +500,8 @@ var M = {
 			"no": "IV",
 			"img": "39.jpg",
 			"tags": [],
-			"description": ""
+			"description": "",
+			"details:": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ut dui sit amet diam dignissim dapibus. Nulla eros mauris, commodo ut arcu ac, semper accumsan metus. Sed non dignissim tellus. Quisque facilisis purus enim, in laoreet dui bibendum quis. Duis tincidunt gravida mi vitae convallis. Maecenas ut nulla imperdiet ipsum lacinia ultrices a eget diam. Sed elementum leo quis tortor scelerisque ornare. Donec posuere tortor ut pellentesque vehicula. Aliquam erat nunc, luctus eget lacus nec, hendrerit blandit massa. Sed egestas nulla in felis ultrices cursus.</p><p>In purus tortor, malesuada ac egestas quis, finibus sit amet ipsum. Cras mattis maximus massa tempor semper. Phasellus non justo egestas nunc pulvinar dignissim vitae a massa. Aenean eleifend tortor a tincidunt tempor. Curabitur augue libero, venenatis id metus eu, pellentesque dictum urna. Proin posuere, leo vel sagittis bibendum, nulla est hendrerit orci, vel lacinia risus eros nec nisi. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus lacinia felis ut congue gravida. Nam at semper mi, a rutrum erat. Morbi quis sem non enim tristique pulvinar. Ut libero massa, tempus a metus a, consequat efficitur quam. Donec a dolor iaculis, imperdiet felis in, pretium massa. Sed et efficitur libero.</p>"
 		},
 		{
 			"name": "Five of Cups",
@@ -470,7 +509,8 @@ var M = {
 			"no": "V",
 			"img": "40.jpg",
 			"tags": [],
-			"description": ""
+			"description": "",
+			"details:": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ut dui sit amet diam dignissim dapibus. Nulla eros mauris, commodo ut arcu ac, semper accumsan metus. Sed non dignissim tellus. Quisque facilisis purus enim, in laoreet dui bibendum quis. Duis tincidunt gravida mi vitae convallis. Maecenas ut nulla imperdiet ipsum lacinia ultrices a eget diam. Sed elementum leo quis tortor scelerisque ornare. Donec posuere tortor ut pellentesque vehicula. Aliquam erat nunc, luctus eget lacus nec, hendrerit blandit massa. Sed egestas nulla in felis ultrices cursus.</p><p>In purus tortor, malesuada ac egestas quis, finibus sit amet ipsum. Cras mattis maximus massa tempor semper. Phasellus non justo egestas nunc pulvinar dignissim vitae a massa. Aenean eleifend tortor a tincidunt tempor. Curabitur augue libero, venenatis id metus eu, pellentesque dictum urna. Proin posuere, leo vel sagittis bibendum, nulla est hendrerit orci, vel lacinia risus eros nec nisi. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus lacinia felis ut congue gravida. Nam at semper mi, a rutrum erat. Morbi quis sem non enim tristique pulvinar. Ut libero massa, tempus a metus a, consequat efficitur quam. Donec a dolor iaculis, imperdiet felis in, pretium massa. Sed et efficitur libero.</p>"
 		},
 		{
 			"name": "Six of Cups",
@@ -478,7 +518,8 @@ var M = {
 			"no": "VI",
 			"img": "41.jpg",
 			"tags": [],
-			"description": ""
+			"description": "",
+			"details:": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ut dui sit amet diam dignissim dapibus. Nulla eros mauris, commodo ut arcu ac, semper accumsan metus. Sed non dignissim tellus. Quisque facilisis purus enim, in laoreet dui bibendum quis. Duis tincidunt gravida mi vitae convallis. Maecenas ut nulla imperdiet ipsum lacinia ultrices a eget diam. Sed elementum leo quis tortor scelerisque ornare. Donec posuere tortor ut pellentesque vehicula. Aliquam erat nunc, luctus eget lacus nec, hendrerit blandit massa. Sed egestas nulla in felis ultrices cursus.</p><p>In purus tortor, malesuada ac egestas quis, finibus sit amet ipsum. Cras mattis maximus massa tempor semper. Phasellus non justo egestas nunc pulvinar dignissim vitae a massa. Aenean eleifend tortor a tincidunt tempor. Curabitur augue libero, venenatis id metus eu, pellentesque dictum urna. Proin posuere, leo vel sagittis bibendum, nulla est hendrerit orci, vel lacinia risus eros nec nisi. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus lacinia felis ut congue gravida. Nam at semper mi, a rutrum erat. Morbi quis sem non enim tristique pulvinar. Ut libero massa, tempus a metus a, consequat efficitur quam. Donec a dolor iaculis, imperdiet felis in, pretium massa. Sed et efficitur libero.</p>"
 		},
 		{
 			"name": "Seven of Cups",
@@ -486,7 +527,8 @@ var M = {
 			"no": "VII",
 			"img": "42.jpg",
 			"tags": [],
-			"description": ""
+			"description": "",
+			"details:": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ut dui sit amet diam dignissim dapibus. Nulla eros mauris, commodo ut arcu ac, semper accumsan metus. Sed non dignissim tellus. Quisque facilisis purus enim, in laoreet dui bibendum quis. Duis tincidunt gravida mi vitae convallis. Maecenas ut nulla imperdiet ipsum lacinia ultrices a eget diam. Sed elementum leo quis tortor scelerisque ornare. Donec posuere tortor ut pellentesque vehicula. Aliquam erat nunc, luctus eget lacus nec, hendrerit blandit massa. Sed egestas nulla in felis ultrices cursus.</p><p>In purus tortor, malesuada ac egestas quis, finibus sit amet ipsum. Cras mattis maximus massa tempor semper. Phasellus non justo egestas nunc pulvinar dignissim vitae a massa. Aenean eleifend tortor a tincidunt tempor. Curabitur augue libero, venenatis id metus eu, pellentesque dictum urna. Proin posuere, leo vel sagittis bibendum, nulla est hendrerit orci, vel lacinia risus eros nec nisi. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus lacinia felis ut congue gravida. Nam at semper mi, a rutrum erat. Morbi quis sem non enim tristique pulvinar. Ut libero massa, tempus a metus a, consequat efficitur quam. Donec a dolor iaculis, imperdiet felis in, pretium massa. Sed et efficitur libero.</p>"
 		},
 		{
 			"name": "Eight of Cups",
@@ -494,7 +536,8 @@ var M = {
 			"no": "VIII",
 			"img": "43.jpg",
 			"tags": [],
-			"description": ""
+			"description": "",
+			"details:": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ut dui sit amet diam dignissim dapibus. Nulla eros mauris, commodo ut arcu ac, semper accumsan metus. Sed non dignissim tellus. Quisque facilisis purus enim, in laoreet dui bibendum quis. Duis tincidunt gravida mi vitae convallis. Maecenas ut nulla imperdiet ipsum lacinia ultrices a eget diam. Sed elementum leo quis tortor scelerisque ornare. Donec posuere tortor ut pellentesque vehicula. Aliquam erat nunc, luctus eget lacus nec, hendrerit blandit massa. Sed egestas nulla in felis ultrices cursus.</p><p>In purus tortor, malesuada ac egestas quis, finibus sit amet ipsum. Cras mattis maximus massa tempor semper. Phasellus non justo egestas nunc pulvinar dignissim vitae a massa. Aenean eleifend tortor a tincidunt tempor. Curabitur augue libero, venenatis id metus eu, pellentesque dictum urna. Proin posuere, leo vel sagittis bibendum, nulla est hendrerit orci, vel lacinia risus eros nec nisi. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus lacinia felis ut congue gravida. Nam at semper mi, a rutrum erat. Morbi quis sem non enim tristique pulvinar. Ut libero massa, tempus a metus a, consequat efficitur quam. Donec a dolor iaculis, imperdiet felis in, pretium massa. Sed et efficitur libero.</p>"
 		},
 		{
 			"name": "Nine of Cups",
@@ -502,7 +545,8 @@ var M = {
 			"no": "IX",
 			"img": "44.jpg",
 			"tags": [],
-			"description": ""
+			"description": "",
+			"details:": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ut dui sit amet diam dignissim dapibus. Nulla eros mauris, commodo ut arcu ac, semper accumsan metus. Sed non dignissim tellus. Quisque facilisis purus enim, in laoreet dui bibendum quis. Duis tincidunt gravida mi vitae convallis. Maecenas ut nulla imperdiet ipsum lacinia ultrices a eget diam. Sed elementum leo quis tortor scelerisque ornare. Donec posuere tortor ut pellentesque vehicula. Aliquam erat nunc, luctus eget lacus nec, hendrerit blandit massa. Sed egestas nulla in felis ultrices cursus.</p><p>In purus tortor, malesuada ac egestas quis, finibus sit amet ipsum. Cras mattis maximus massa tempor semper. Phasellus non justo egestas nunc pulvinar dignissim vitae a massa. Aenean eleifend tortor a tincidunt tempor. Curabitur augue libero, venenatis id metus eu, pellentesque dictum urna. Proin posuere, leo vel sagittis bibendum, nulla est hendrerit orci, vel lacinia risus eros nec nisi. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus lacinia felis ut congue gravida. Nam at semper mi, a rutrum erat. Morbi quis sem non enim tristique pulvinar. Ut libero massa, tempus a metus a, consequat efficitur quam. Donec a dolor iaculis, imperdiet felis in, pretium massa. Sed et efficitur libero.</p>"
 		},
 		{
 			"name": "Ten of Cups",
@@ -510,7 +554,8 @@ var M = {
 			"no": "X",
 			"img": "45.jpg",
 			"tags": [],
-			"description": ""
+			"description": "",
+			"details:": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ut dui sit amet diam dignissim dapibus. Nulla eros mauris, commodo ut arcu ac, semper accumsan metus. Sed non dignissim tellus. Quisque facilisis purus enim, in laoreet dui bibendum quis. Duis tincidunt gravida mi vitae convallis. Maecenas ut nulla imperdiet ipsum lacinia ultrices a eget diam. Sed elementum leo quis tortor scelerisque ornare. Donec posuere tortor ut pellentesque vehicula. Aliquam erat nunc, luctus eget lacus nec, hendrerit blandit massa. Sed egestas nulla in felis ultrices cursus.</p><p>In purus tortor, malesuada ac egestas quis, finibus sit amet ipsum. Cras mattis maximus massa tempor semper. Phasellus non justo egestas nunc pulvinar dignissim vitae a massa. Aenean eleifend tortor a tincidunt tempor. Curabitur augue libero, venenatis id metus eu, pellentesque dictum urna. Proin posuere, leo vel sagittis bibendum, nulla est hendrerit orci, vel lacinia risus eros nec nisi. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus lacinia felis ut congue gravida. Nam at semper mi, a rutrum erat. Morbi quis sem non enim tristique pulvinar. Ut libero massa, tempus a metus a, consequat efficitur quam. Donec a dolor iaculis, imperdiet felis in, pretium massa. Sed et efficitur libero.</p>"
 		},
 		{
 			"name": "Page of Cups",
@@ -518,7 +563,8 @@ var M = {
 			"no": "",
 			"img": "46.jpg",
 			"tags": [],
-			"description": ""
+			"description": "",
+			"details:": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ut dui sit amet diam dignissim dapibus. Nulla eros mauris, commodo ut arcu ac, semper accumsan metus. Sed non dignissim tellus. Quisque facilisis purus enim, in laoreet dui bibendum quis. Duis tincidunt gravida mi vitae convallis. Maecenas ut nulla imperdiet ipsum lacinia ultrices a eget diam. Sed elementum leo quis tortor scelerisque ornare. Donec posuere tortor ut pellentesque vehicula. Aliquam erat nunc, luctus eget lacus nec, hendrerit blandit massa. Sed egestas nulla in felis ultrices cursus.</p><p>In purus tortor, malesuada ac egestas quis, finibus sit amet ipsum. Cras mattis maximus massa tempor semper. Phasellus non justo egestas nunc pulvinar dignissim vitae a massa. Aenean eleifend tortor a tincidunt tempor. Curabitur augue libero, venenatis id metus eu, pellentesque dictum urna. Proin posuere, leo vel sagittis bibendum, nulla est hendrerit orci, vel lacinia risus eros nec nisi. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus lacinia felis ut congue gravida. Nam at semper mi, a rutrum erat. Morbi quis sem non enim tristique pulvinar. Ut libero massa, tempus a metus a, consequat efficitur quam. Donec a dolor iaculis, imperdiet felis in, pretium massa. Sed et efficitur libero.</p>"
 		},
 		{
 			"name": "Knight of Cups",
@@ -526,7 +572,8 @@ var M = {
 			"no": "",
 			"img": "47.jpg",
 			"tags": [],
-			"description": ""
+			"description": "",
+			"details:": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ut dui sit amet diam dignissim dapibus. Nulla eros mauris, commodo ut arcu ac, semper accumsan metus. Sed non dignissim tellus. Quisque facilisis purus enim, in laoreet dui bibendum quis. Duis tincidunt gravida mi vitae convallis. Maecenas ut nulla imperdiet ipsum lacinia ultrices a eget diam. Sed elementum leo quis tortor scelerisque ornare. Donec posuere tortor ut pellentesque vehicula. Aliquam erat nunc, luctus eget lacus nec, hendrerit blandit massa. Sed egestas nulla in felis ultrices cursus.</p><p>In purus tortor, malesuada ac egestas quis, finibus sit amet ipsum. Cras mattis maximus massa tempor semper. Phasellus non justo egestas nunc pulvinar dignissim vitae a massa. Aenean eleifend tortor a tincidunt tempor. Curabitur augue libero, venenatis id metus eu, pellentesque dictum urna. Proin posuere, leo vel sagittis bibendum, nulla est hendrerit orci, vel lacinia risus eros nec nisi. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus lacinia felis ut congue gravida. Nam at semper mi, a rutrum erat. Morbi quis sem non enim tristique pulvinar. Ut libero massa, tempus a metus a, consequat efficitur quam. Donec a dolor iaculis, imperdiet felis in, pretium massa. Sed et efficitur libero.</p>"
 		},
 		{
 			"name": "Queen of Cups",
@@ -534,7 +581,8 @@ var M = {
 			"no": "",
 			"img": "48.jpg",
 			"tags": [],
-			"description": ""
+			"description": "",
+			"details:": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ut dui sit amet diam dignissim dapibus. Nulla eros mauris, commodo ut arcu ac, semper accumsan metus. Sed non dignissim tellus. Quisque facilisis purus enim, in laoreet dui bibendum quis. Duis tincidunt gravida mi vitae convallis. Maecenas ut nulla imperdiet ipsum lacinia ultrices a eget diam. Sed elementum leo quis tortor scelerisque ornare. Donec posuere tortor ut pellentesque vehicula. Aliquam erat nunc, luctus eget lacus nec, hendrerit blandit massa. Sed egestas nulla in felis ultrices cursus.</p><p>In purus tortor, malesuada ac egestas quis, finibus sit amet ipsum. Cras mattis maximus massa tempor semper. Phasellus non justo egestas nunc pulvinar dignissim vitae a massa. Aenean eleifend tortor a tincidunt tempor. Curabitur augue libero, venenatis id metus eu, pellentesque dictum urna. Proin posuere, leo vel sagittis bibendum, nulla est hendrerit orci, vel lacinia risus eros nec nisi. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus lacinia felis ut congue gravida. Nam at semper mi, a rutrum erat. Morbi quis sem non enim tristique pulvinar. Ut libero massa, tempus a metus a, consequat efficitur quam. Donec a dolor iaculis, imperdiet felis in, pretium massa. Sed et efficitur libero.</p>"
 		},
 		{
 			"name": "King of Cups",
@@ -542,7 +590,8 @@ var M = {
 			"no": "",
 			"img": "49.jpg",
 			"tags": [],
-			"description": ""
+			"description": "",
+			"details:": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ut dui sit amet diam dignissim dapibus. Nulla eros mauris, commodo ut arcu ac, semper accumsan metus. Sed non dignissim tellus. Quisque facilisis purus enim, in laoreet dui bibendum quis. Duis tincidunt gravida mi vitae convallis. Maecenas ut nulla imperdiet ipsum lacinia ultrices a eget diam. Sed elementum leo quis tortor scelerisque ornare. Donec posuere tortor ut pellentesque vehicula. Aliquam erat nunc, luctus eget lacus nec, hendrerit blandit massa. Sed egestas nulla in felis ultrices cursus.</p><p>In purus tortor, malesuada ac egestas quis, finibus sit amet ipsum. Cras mattis maximus massa tempor semper. Phasellus non justo egestas nunc pulvinar dignissim vitae a massa. Aenean eleifend tortor a tincidunt tempor. Curabitur augue libero, venenatis id metus eu, pellentesque dictum urna. Proin posuere, leo vel sagittis bibendum, nulla est hendrerit orci, vel lacinia risus eros nec nisi. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus lacinia felis ut congue gravida. Nam at semper mi, a rutrum erat. Morbi quis sem non enim tristique pulvinar. Ut libero massa, tempus a metus a, consequat efficitur quam. Donec a dolor iaculis, imperdiet felis in, pretium massa. Sed et efficitur libero.</p>"
 		},
 		{
 			"name": "Ace of Swords",
@@ -550,7 +599,8 @@ var M = {
 			"no": "",
 			"img": "50.jpg",
 			"tags": [],
-			"description": ""
+			"description": "",
+			"details:": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ut dui sit amet diam dignissim dapibus. Nulla eros mauris, commodo ut arcu ac, semper accumsan metus. Sed non dignissim tellus. Quisque facilisis purus enim, in laoreet dui bibendum quis. Duis tincidunt gravida mi vitae convallis. Maecenas ut nulla imperdiet ipsum lacinia ultrices a eget diam. Sed elementum leo quis tortor scelerisque ornare. Donec posuere tortor ut pellentesque vehicula. Aliquam erat nunc, luctus eget lacus nec, hendrerit blandit massa. Sed egestas nulla in felis ultrices cursus.</p><p>In purus tortor, malesuada ac egestas quis, finibus sit amet ipsum. Cras mattis maximus massa tempor semper. Phasellus non justo egestas nunc pulvinar dignissim vitae a massa. Aenean eleifend tortor a tincidunt tempor. Curabitur augue libero, venenatis id metus eu, pellentesque dictum urna. Proin posuere, leo vel sagittis bibendum, nulla est hendrerit orci, vel lacinia risus eros nec nisi. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus lacinia felis ut congue gravida. Nam at semper mi, a rutrum erat. Morbi quis sem non enim tristique pulvinar. Ut libero massa, tempus a metus a, consequat efficitur quam. Donec a dolor iaculis, imperdiet felis in, pretium massa. Sed et efficitur libero.</p>"
 		},
 		{
 			"name": "Two of Swords",
@@ -558,7 +608,8 @@ var M = {
 			"no": "II",
 			"img": "51.jpg",
 			"tags": [],
-			"description": ""
+			"description": "",
+			"details:": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ut dui sit amet diam dignissim dapibus. Nulla eros mauris, commodo ut arcu ac, semper accumsan metus. Sed non dignissim tellus. Quisque facilisis purus enim, in laoreet dui bibendum quis. Duis tincidunt gravida mi vitae convallis. Maecenas ut nulla imperdiet ipsum lacinia ultrices a eget diam. Sed elementum leo quis tortor scelerisque ornare. Donec posuere tortor ut pellentesque vehicula. Aliquam erat nunc, luctus eget lacus nec, hendrerit blandit massa. Sed egestas nulla in felis ultrices cursus.</p><p>In purus tortor, malesuada ac egestas quis, finibus sit amet ipsum. Cras mattis maximus massa tempor semper. Phasellus non justo egestas nunc pulvinar dignissim vitae a massa. Aenean eleifend tortor a tincidunt tempor. Curabitur augue libero, venenatis id metus eu, pellentesque dictum urna. Proin posuere, leo vel sagittis bibendum, nulla est hendrerit orci, vel lacinia risus eros nec nisi. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus lacinia felis ut congue gravida. Nam at semper mi, a rutrum erat. Morbi quis sem non enim tristique pulvinar. Ut libero massa, tempus a metus a, consequat efficitur quam. Donec a dolor iaculis, imperdiet felis in, pretium massa. Sed et efficitur libero.</p>"
 		},
 		{
 			"name": "Three of Swords",
@@ -566,7 +617,8 @@ var M = {
 			"no": "III",
 			"img": "52.jpg",
 			"tags": [],
-			"description": ""
+			"description": "",
+			"details:": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ut dui sit amet diam dignissim dapibus. Nulla eros mauris, commodo ut arcu ac, semper accumsan metus. Sed non dignissim tellus. Quisque facilisis purus enim, in laoreet dui bibendum quis. Duis tincidunt gravida mi vitae convallis. Maecenas ut nulla imperdiet ipsum lacinia ultrices a eget diam. Sed elementum leo quis tortor scelerisque ornare. Donec posuere tortor ut pellentesque vehicula. Aliquam erat nunc, luctus eget lacus nec, hendrerit blandit massa. Sed egestas nulla in felis ultrices cursus.</p><p>In purus tortor, malesuada ac egestas quis, finibus sit amet ipsum. Cras mattis maximus massa tempor semper. Phasellus non justo egestas nunc pulvinar dignissim vitae a massa. Aenean eleifend tortor a tincidunt tempor. Curabitur augue libero, venenatis id metus eu, pellentesque dictum urna. Proin posuere, leo vel sagittis bibendum, nulla est hendrerit orci, vel lacinia risus eros nec nisi. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus lacinia felis ut congue gravida. Nam at semper mi, a rutrum erat. Morbi quis sem non enim tristique pulvinar. Ut libero massa, tempus a metus a, consequat efficitur quam. Donec a dolor iaculis, imperdiet felis in, pretium massa. Sed et efficitur libero.</p>"
 		},
 		{
 			"name": "Four of Swords",
@@ -574,7 +626,8 @@ var M = {
 			"no": "IV",
 			"img": "53.jpg",
 			"tags": [],
-			"description": ""
+			"description": "",
+			"details:": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ut dui sit amet diam dignissim dapibus. Nulla eros mauris, commodo ut arcu ac, semper accumsan metus. Sed non dignissim tellus. Quisque facilisis purus enim, in laoreet dui bibendum quis. Duis tincidunt gravida mi vitae convallis. Maecenas ut nulla imperdiet ipsum lacinia ultrices a eget diam. Sed elementum leo quis tortor scelerisque ornare. Donec posuere tortor ut pellentesque vehicula. Aliquam erat nunc, luctus eget lacus nec, hendrerit blandit massa. Sed egestas nulla in felis ultrices cursus.</p><p>In purus tortor, malesuada ac egestas quis, finibus sit amet ipsum. Cras mattis maximus massa tempor semper. Phasellus non justo egestas nunc pulvinar dignissim vitae a massa. Aenean eleifend tortor a tincidunt tempor. Curabitur augue libero, venenatis id metus eu, pellentesque dictum urna. Proin posuere, leo vel sagittis bibendum, nulla est hendrerit orci, vel lacinia risus eros nec nisi. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus lacinia felis ut congue gravida. Nam at semper mi, a rutrum erat. Morbi quis sem non enim tristique pulvinar. Ut libero massa, tempus a metus a, consequat efficitur quam. Donec a dolor iaculis, imperdiet felis in, pretium massa. Sed et efficitur libero.</p>"
 		},
 		{
 			"name": "Five of Swords",
@@ -582,7 +635,8 @@ var M = {
 			"no": "V",
 			"img": "54.jpg",
 			"tags": [],
-			"description": ""
+			"description": "",
+			"details:": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ut dui sit amet diam dignissim dapibus. Nulla eros mauris, commodo ut arcu ac, semper accumsan metus. Sed non dignissim tellus. Quisque facilisis purus enim, in laoreet dui bibendum quis. Duis tincidunt gravida mi vitae convallis. Maecenas ut nulla imperdiet ipsum lacinia ultrices a eget diam. Sed elementum leo quis tortor scelerisque ornare. Donec posuere tortor ut pellentesque vehicula. Aliquam erat nunc, luctus eget lacus nec, hendrerit blandit massa. Sed egestas nulla in felis ultrices cursus.</p><p>In purus tortor, malesuada ac egestas quis, finibus sit amet ipsum. Cras mattis maximus massa tempor semper. Phasellus non justo egestas nunc pulvinar dignissim vitae a massa. Aenean eleifend tortor a tincidunt tempor. Curabitur augue libero, venenatis id metus eu, pellentesque dictum urna. Proin posuere, leo vel sagittis bibendum, nulla est hendrerit orci, vel lacinia risus eros nec nisi. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus lacinia felis ut congue gravida. Nam at semper mi, a rutrum erat. Morbi quis sem non enim tristique pulvinar. Ut libero massa, tempus a metus a, consequat efficitur quam. Donec a dolor iaculis, imperdiet felis in, pretium massa. Sed et efficitur libero.</p>"
 		},
 		{
 			"name": "Six of Swords",
@@ -590,7 +644,8 @@ var M = {
 			"no": "VI",
 			"img": "55.jpg",
 			"tags": [],
-			"description": ""
+			"description": "",
+			"details:": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ut dui sit amet diam dignissim dapibus. Nulla eros mauris, commodo ut arcu ac, semper accumsan metus. Sed non dignissim tellus. Quisque facilisis purus enim, in laoreet dui bibendum quis. Duis tincidunt gravida mi vitae convallis. Maecenas ut nulla imperdiet ipsum lacinia ultrices a eget diam. Sed elementum leo quis tortor scelerisque ornare. Donec posuere tortor ut pellentesque vehicula. Aliquam erat nunc, luctus eget lacus nec, hendrerit blandit massa. Sed egestas nulla in felis ultrices cursus.</p><p>In purus tortor, malesuada ac egestas quis, finibus sit amet ipsum. Cras mattis maximus massa tempor semper. Phasellus non justo egestas nunc pulvinar dignissim vitae a massa. Aenean eleifend tortor a tincidunt tempor. Curabitur augue libero, venenatis id metus eu, pellentesque dictum urna. Proin posuere, leo vel sagittis bibendum, nulla est hendrerit orci, vel lacinia risus eros nec nisi. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus lacinia felis ut congue gravida. Nam at semper mi, a rutrum erat. Morbi quis sem non enim tristique pulvinar. Ut libero massa, tempus a metus a, consequat efficitur quam. Donec a dolor iaculis, imperdiet felis in, pretium massa. Sed et efficitur libero.</p>"
 		},
 		{
 			"name": "Seven of Swords",
@@ -598,7 +653,8 @@ var M = {
 			"no": "VII",
 			"img": "56.jpg",
 			"tags": [],
-			"description": ""
+			"description": "",
+			"details:": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ut dui sit amet diam dignissim dapibus. Nulla eros mauris, commodo ut arcu ac, semper accumsan metus. Sed non dignissim tellus. Quisque facilisis purus enim, in laoreet dui bibendum quis. Duis tincidunt gravida mi vitae convallis. Maecenas ut nulla imperdiet ipsum lacinia ultrices a eget diam. Sed elementum leo quis tortor scelerisque ornare. Donec posuere tortor ut pellentesque vehicula. Aliquam erat nunc, luctus eget lacus nec, hendrerit blandit massa. Sed egestas nulla in felis ultrices cursus.</p><p>In purus tortor, malesuada ac egestas quis, finibus sit amet ipsum. Cras mattis maximus massa tempor semper. Phasellus non justo egestas nunc pulvinar dignissim vitae a massa. Aenean eleifend tortor a tincidunt tempor. Curabitur augue libero, venenatis id metus eu, pellentesque dictum urna. Proin posuere, leo vel sagittis bibendum, nulla est hendrerit orci, vel lacinia risus eros nec nisi. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus lacinia felis ut congue gravida. Nam at semper mi, a rutrum erat. Morbi quis sem non enim tristique pulvinar. Ut libero massa, tempus a metus a, consequat efficitur quam. Donec a dolor iaculis, imperdiet felis in, pretium massa. Sed et efficitur libero.</p>"
 		},
 		{
 			"name": "Eight of Swords",
@@ -606,7 +662,8 @@ var M = {
 			"no": "VIII",
 			"img": "57.jpg",
 			"tags": [],
-			"description": ""
+			"description": "",
+			"details:": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ut dui sit amet diam dignissim dapibus. Nulla eros mauris, commodo ut arcu ac, semper accumsan metus. Sed non dignissim tellus. Quisque facilisis purus enim, in laoreet dui bibendum quis. Duis tincidunt gravida mi vitae convallis. Maecenas ut nulla imperdiet ipsum lacinia ultrices a eget diam. Sed elementum leo quis tortor scelerisque ornare. Donec posuere tortor ut pellentesque vehicula. Aliquam erat nunc, luctus eget lacus nec, hendrerit blandit massa. Sed egestas nulla in felis ultrices cursus.</p><p>In purus tortor, malesuada ac egestas quis, finibus sit amet ipsum. Cras mattis maximus massa tempor semper. Phasellus non justo egestas nunc pulvinar dignissim vitae a massa. Aenean eleifend tortor a tincidunt tempor. Curabitur augue libero, venenatis id metus eu, pellentesque dictum urna. Proin posuere, leo vel sagittis bibendum, nulla est hendrerit orci, vel lacinia risus eros nec nisi. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus lacinia felis ut congue gravida. Nam at semper mi, a rutrum erat. Morbi quis sem non enim tristique pulvinar. Ut libero massa, tempus a metus a, consequat efficitur quam. Donec a dolor iaculis, imperdiet felis in, pretium massa. Sed et efficitur libero.</p>"
 		},
 		{
 			"name": "Nine of Swords",
@@ -614,7 +671,8 @@ var M = {
 			"no": "IX",
 			"img": "58.jpg",
 			"tags": [],
-			"description": ""
+			"description": "",
+			"details:": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ut dui sit amet diam dignissim dapibus. Nulla eros mauris, commodo ut arcu ac, semper accumsan metus. Sed non dignissim tellus. Quisque facilisis purus enim, in laoreet dui bibendum quis. Duis tincidunt gravida mi vitae convallis. Maecenas ut nulla imperdiet ipsum lacinia ultrices a eget diam. Sed elementum leo quis tortor scelerisque ornare. Donec posuere tortor ut pellentesque vehicula. Aliquam erat nunc, luctus eget lacus nec, hendrerit blandit massa. Sed egestas nulla in felis ultrices cursus.</p><p>In purus tortor, malesuada ac egestas quis, finibus sit amet ipsum. Cras mattis maximus massa tempor semper. Phasellus non justo egestas nunc pulvinar dignissim vitae a massa. Aenean eleifend tortor a tincidunt tempor. Curabitur augue libero, venenatis id metus eu, pellentesque dictum urna. Proin posuere, leo vel sagittis bibendum, nulla est hendrerit orci, vel lacinia risus eros nec nisi. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus lacinia felis ut congue gravida. Nam at semper mi, a rutrum erat. Morbi quis sem non enim tristique pulvinar. Ut libero massa, tempus a metus a, consequat efficitur quam. Donec a dolor iaculis, imperdiet felis in, pretium massa. Sed et efficitur libero.</p>"
 		},
 		{
 			"name": "Ten of Swords",
@@ -622,7 +680,8 @@ var M = {
 			"no": "X",
 			"img": "59.jpg",
 			"tags": [],
-			"description": ""
+			"description": "",
+			"details:": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ut dui sit amet diam dignissim dapibus. Nulla eros mauris, commodo ut arcu ac, semper accumsan metus. Sed non dignissim tellus. Quisque facilisis purus enim, in laoreet dui bibendum quis. Duis tincidunt gravida mi vitae convallis. Maecenas ut nulla imperdiet ipsum lacinia ultrices a eget diam. Sed elementum leo quis tortor scelerisque ornare. Donec posuere tortor ut pellentesque vehicula. Aliquam erat nunc, luctus eget lacus nec, hendrerit blandit massa. Sed egestas nulla in felis ultrices cursus.</p><p>In purus tortor, malesuada ac egestas quis, finibus sit amet ipsum. Cras mattis maximus massa tempor semper. Phasellus non justo egestas nunc pulvinar dignissim vitae a massa. Aenean eleifend tortor a tincidunt tempor. Curabitur augue libero, venenatis id metus eu, pellentesque dictum urna. Proin posuere, leo vel sagittis bibendum, nulla est hendrerit orci, vel lacinia risus eros nec nisi. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus lacinia felis ut congue gravida. Nam at semper mi, a rutrum erat. Morbi quis sem non enim tristique pulvinar. Ut libero massa, tempus a metus a, consequat efficitur quam. Donec a dolor iaculis, imperdiet felis in, pretium massa. Sed et efficitur libero.</p>"
 		},
 		{
 			"name": "Page of Swords",
@@ -630,7 +689,8 @@ var M = {
 			"no": "",
 			"img": "60.jpg",
 			"tags": [],
-			"description": ""
+			"description": "",
+			"details:": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ut dui sit amet diam dignissim dapibus. Nulla eros mauris, commodo ut arcu ac, semper accumsan metus. Sed non dignissim tellus. Quisque facilisis purus enim, in laoreet dui bibendum quis. Duis tincidunt gravida mi vitae convallis. Maecenas ut nulla imperdiet ipsum lacinia ultrices a eget diam. Sed elementum leo quis tortor scelerisque ornare. Donec posuere tortor ut pellentesque vehicula. Aliquam erat nunc, luctus eget lacus nec, hendrerit blandit massa. Sed egestas nulla in felis ultrices cursus.</p><p>In purus tortor, malesuada ac egestas quis, finibus sit amet ipsum. Cras mattis maximus massa tempor semper. Phasellus non justo egestas nunc pulvinar dignissim vitae a massa. Aenean eleifend tortor a tincidunt tempor. Curabitur augue libero, venenatis id metus eu, pellentesque dictum urna. Proin posuere, leo vel sagittis bibendum, nulla est hendrerit orci, vel lacinia risus eros nec nisi. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus lacinia felis ut congue gravida. Nam at semper mi, a rutrum erat. Morbi quis sem non enim tristique pulvinar. Ut libero massa, tempus a metus a, consequat efficitur quam. Donec a dolor iaculis, imperdiet felis in, pretium massa. Sed et efficitur libero.</p>"
 		},
 		{
 			"name": "Knight of Swords",
@@ -638,7 +698,8 @@ var M = {
 			"no": "",
 			"img": "61.jpg",
 			"tags": [],
-			"description": ""
+			"description": "",
+			"details:": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ut dui sit amet diam dignissim dapibus. Nulla eros mauris, commodo ut arcu ac, semper accumsan metus. Sed non dignissim tellus. Quisque facilisis purus enim, in laoreet dui bibendum quis. Duis tincidunt gravida mi vitae convallis. Maecenas ut nulla imperdiet ipsum lacinia ultrices a eget diam. Sed elementum leo quis tortor scelerisque ornare. Donec posuere tortor ut pellentesque vehicula. Aliquam erat nunc, luctus eget lacus nec, hendrerit blandit massa. Sed egestas nulla in felis ultrices cursus.</p><p>In purus tortor, malesuada ac egestas quis, finibus sit amet ipsum. Cras mattis maximus massa tempor semper. Phasellus non justo egestas nunc pulvinar dignissim vitae a massa. Aenean eleifend tortor a tincidunt tempor. Curabitur augue libero, venenatis id metus eu, pellentesque dictum urna. Proin posuere, leo vel sagittis bibendum, nulla est hendrerit orci, vel lacinia risus eros nec nisi. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus lacinia felis ut congue gravida. Nam at semper mi, a rutrum erat. Morbi quis sem non enim tristique pulvinar. Ut libero massa, tempus a metus a, consequat efficitur quam. Donec a dolor iaculis, imperdiet felis in, pretium massa. Sed et efficitur libero.</p>"
 		},
 		{
 			"name": "Queen of Swords",
@@ -646,7 +707,8 @@ var M = {
 			"no": "",
 			"img": "62.jpg",
 			"tags": [],
-			"description": ""
+			"description": "",
+			"details:": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ut dui sit amet diam dignissim dapibus. Nulla eros mauris, commodo ut arcu ac, semper accumsan metus. Sed non dignissim tellus. Quisque facilisis purus enim, in laoreet dui bibendum quis. Duis tincidunt gravida mi vitae convallis. Maecenas ut nulla imperdiet ipsum lacinia ultrices a eget diam. Sed elementum leo quis tortor scelerisque ornare. Donec posuere tortor ut pellentesque vehicula. Aliquam erat nunc, luctus eget lacus nec, hendrerit blandit massa. Sed egestas nulla in felis ultrices cursus.</p><p>In purus tortor, malesuada ac egestas quis, finibus sit amet ipsum. Cras mattis maximus massa tempor semper. Phasellus non justo egestas nunc pulvinar dignissim vitae a massa. Aenean eleifend tortor a tincidunt tempor. Curabitur augue libero, venenatis id metus eu, pellentesque dictum urna. Proin posuere, leo vel sagittis bibendum, nulla est hendrerit orci, vel lacinia risus eros nec nisi. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus lacinia felis ut congue gravida. Nam at semper mi, a rutrum erat. Morbi quis sem non enim tristique pulvinar. Ut libero massa, tempus a metus a, consequat efficitur quam. Donec a dolor iaculis, imperdiet felis in, pretium massa. Sed et efficitur libero.</p>"
 		},
 		{
 			"name": "King of Swords",
@@ -654,7 +716,8 @@ var M = {
 			"no": "",
 			"img": "63.jpg",
 			"tags": [],
-			"description": ""
+			"description": "",
+			"details:": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ut dui sit amet diam dignissim dapibus. Nulla eros mauris, commodo ut arcu ac, semper accumsan metus. Sed non dignissim tellus. Quisque facilisis purus enim, in laoreet dui bibendum quis. Duis tincidunt gravida mi vitae convallis. Maecenas ut nulla imperdiet ipsum lacinia ultrices a eget diam. Sed elementum leo quis tortor scelerisque ornare. Donec posuere tortor ut pellentesque vehicula. Aliquam erat nunc, luctus eget lacus nec, hendrerit blandit massa. Sed egestas nulla in felis ultrices cursus.</p><p>In purus tortor, malesuada ac egestas quis, finibus sit amet ipsum. Cras mattis maximus massa tempor semper. Phasellus non justo egestas nunc pulvinar dignissim vitae a massa. Aenean eleifend tortor a tincidunt tempor. Curabitur augue libero, venenatis id metus eu, pellentesque dictum urna. Proin posuere, leo vel sagittis bibendum, nulla est hendrerit orci, vel lacinia risus eros nec nisi. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus lacinia felis ut congue gravida. Nam at semper mi, a rutrum erat. Morbi quis sem non enim tristique pulvinar. Ut libero massa, tempus a metus a, consequat efficitur quam. Donec a dolor iaculis, imperdiet felis in, pretium massa. Sed et efficitur libero.</p>"
 		},
 		{
 			"name": "Ace of Pentacles",
@@ -662,7 +725,8 @@ var M = {
 			"no": "",
 			"img": "64.jpg",
 			"tags": [],
-			"description": ""
+			"description": "",
+			"details:": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ut dui sit amet diam dignissim dapibus. Nulla eros mauris, commodo ut arcu ac, semper accumsan metus. Sed non dignissim tellus. Quisque facilisis purus enim, in laoreet dui bibendum quis. Duis tincidunt gravida mi vitae convallis. Maecenas ut nulla imperdiet ipsum lacinia ultrices a eget diam. Sed elementum leo quis tortor scelerisque ornare. Donec posuere tortor ut pellentesque vehicula. Aliquam erat nunc, luctus eget lacus nec, hendrerit blandit massa. Sed egestas nulla in felis ultrices cursus.</p><p>In purus tortor, malesuada ac egestas quis, finibus sit amet ipsum. Cras mattis maximus massa tempor semper. Phasellus non justo egestas nunc pulvinar dignissim vitae a massa. Aenean eleifend tortor a tincidunt tempor. Curabitur augue libero, venenatis id metus eu, pellentesque dictum urna. Proin posuere, leo vel sagittis bibendum, nulla est hendrerit orci, vel lacinia risus eros nec nisi. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus lacinia felis ut congue gravida. Nam at semper mi, a rutrum erat. Morbi quis sem non enim tristique pulvinar. Ut libero massa, tempus a metus a, consequat efficitur quam. Donec a dolor iaculis, imperdiet felis in, pretium massa. Sed et efficitur libero.</p>"
 		},
 		{
 			"name": "Two of Pentacles",
@@ -670,7 +734,8 @@ var M = {
 			"no": "II",
 			"img": "65.jpg",
 			"tags": [],
-			"description": ""
+			"description": "",
+			"details:": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ut dui sit amet diam dignissim dapibus. Nulla eros mauris, commodo ut arcu ac, semper accumsan metus. Sed non dignissim tellus. Quisque facilisis purus enim, in laoreet dui bibendum quis. Duis tincidunt gravida mi vitae convallis. Maecenas ut nulla imperdiet ipsum lacinia ultrices a eget diam. Sed elementum leo quis tortor scelerisque ornare. Donec posuere tortor ut pellentesque vehicula. Aliquam erat nunc, luctus eget lacus nec, hendrerit blandit massa. Sed egestas nulla in felis ultrices cursus.</p><p>In purus tortor, malesuada ac egestas quis, finibus sit amet ipsum. Cras mattis maximus massa tempor semper. Phasellus non justo egestas nunc pulvinar dignissim vitae a massa. Aenean eleifend tortor a tincidunt tempor. Curabitur augue libero, venenatis id metus eu, pellentesque dictum urna. Proin posuere, leo vel sagittis bibendum, nulla est hendrerit orci, vel lacinia risus eros nec nisi. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus lacinia felis ut congue gravida. Nam at semper mi, a rutrum erat. Morbi quis sem non enim tristique pulvinar. Ut libero massa, tempus a metus a, consequat efficitur quam. Donec a dolor iaculis, imperdiet felis in, pretium massa. Sed et efficitur libero.</p>"
 		},
 		{
 			"name": "Three of Pentacles",
@@ -678,7 +743,8 @@ var M = {
 			"no": "III",
 			"img": "66.jpg",
 			"tags": [],
-			"description": ""
+			"description": "",
+			"details:": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ut dui sit amet diam dignissim dapibus. Nulla eros mauris, commodo ut arcu ac, semper accumsan metus. Sed non dignissim tellus. Quisque facilisis purus enim, in laoreet dui bibendum quis. Duis tincidunt gravida mi vitae convallis. Maecenas ut nulla imperdiet ipsum lacinia ultrices a eget diam. Sed elementum leo quis tortor scelerisque ornare. Donec posuere tortor ut pellentesque vehicula. Aliquam erat nunc, luctus eget lacus nec, hendrerit blandit massa. Sed egestas nulla in felis ultrices cursus.</p><p>In purus tortor, malesuada ac egestas quis, finibus sit amet ipsum. Cras mattis maximus massa tempor semper. Phasellus non justo egestas nunc pulvinar dignissim vitae a massa. Aenean eleifend tortor a tincidunt tempor. Curabitur augue libero, venenatis id metus eu, pellentesque dictum urna. Proin posuere, leo vel sagittis bibendum, nulla est hendrerit orci, vel lacinia risus eros nec nisi. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus lacinia felis ut congue gravida. Nam at semper mi, a rutrum erat. Morbi quis sem non enim tristique pulvinar. Ut libero massa, tempus a metus a, consequat efficitur quam. Donec a dolor iaculis, imperdiet felis in, pretium massa. Sed et efficitur libero.</p>"
 		},
 		{
 			"name": "Four of Pentacles",
@@ -686,7 +752,8 @@ var M = {
 			"no": "IV",
 			"img": "67.jpg",
 			"tags": [],
-			"description": ""
+			"description": "",
+			"details:": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ut dui sit amet diam dignissim dapibus. Nulla eros mauris, commodo ut arcu ac, semper accumsan metus. Sed non dignissim tellus. Quisque facilisis purus enim, in laoreet dui bibendum quis. Duis tincidunt gravida mi vitae convallis. Maecenas ut nulla imperdiet ipsum lacinia ultrices a eget diam. Sed elementum leo quis tortor scelerisque ornare. Donec posuere tortor ut pellentesque vehicula. Aliquam erat nunc, luctus eget lacus nec, hendrerit blandit massa. Sed egestas nulla in felis ultrices cursus.</p><p>In purus tortor, malesuada ac egestas quis, finibus sit amet ipsum. Cras mattis maximus massa tempor semper. Phasellus non justo egestas nunc pulvinar dignissim vitae a massa. Aenean eleifend tortor a tincidunt tempor. Curabitur augue libero, venenatis id metus eu, pellentesque dictum urna. Proin posuere, leo vel sagittis bibendum, nulla est hendrerit orci, vel lacinia risus eros nec nisi. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus lacinia felis ut congue gravida. Nam at semper mi, a rutrum erat. Morbi quis sem non enim tristique pulvinar. Ut libero massa, tempus a metus a, consequat efficitur quam. Donec a dolor iaculis, imperdiet felis in, pretium massa. Sed et efficitur libero.</p>"
 		},
 		{
 			"name": "Five of Pentacles",
@@ -694,7 +761,8 @@ var M = {
 			"no": "V",
 			"img": "68.jpg",
 			"tags": [],
-			"description": ""
+			"description": "",
+			"details:": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ut dui sit amet diam dignissim dapibus. Nulla eros mauris, commodo ut arcu ac, semper accumsan metus. Sed non dignissim tellus. Quisque facilisis purus enim, in laoreet dui bibendum quis. Duis tincidunt gravida mi vitae convallis. Maecenas ut nulla imperdiet ipsum lacinia ultrices a eget diam. Sed elementum leo quis tortor scelerisque ornare. Donec posuere tortor ut pellentesque vehicula. Aliquam erat nunc, luctus eget lacus nec, hendrerit blandit massa. Sed egestas nulla in felis ultrices cursus.</p><p>In purus tortor, malesuada ac egestas quis, finibus sit amet ipsum. Cras mattis maximus massa tempor semper. Phasellus non justo egestas nunc pulvinar dignissim vitae a massa. Aenean eleifend tortor a tincidunt tempor. Curabitur augue libero, venenatis id metus eu, pellentesque dictum urna. Proin posuere, leo vel sagittis bibendum, nulla est hendrerit orci, vel lacinia risus eros nec nisi. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus lacinia felis ut congue gravida. Nam at semper mi, a rutrum erat. Morbi quis sem non enim tristique pulvinar. Ut libero massa, tempus a metus a, consequat efficitur quam. Donec a dolor iaculis, imperdiet felis in, pretium massa. Sed et efficitur libero.</p>"
 		},
 		{
 			"name": "Six of Pentacles",
@@ -702,7 +770,8 @@ var M = {
 			"no": "VI",
 			"img": "69.jpg",
 			"tags": [],
-			"description": ""
+			"description": "",
+			"details:": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ut dui sit amet diam dignissim dapibus. Nulla eros mauris, commodo ut arcu ac, semper accumsan metus. Sed non dignissim tellus. Quisque facilisis purus enim, in laoreet dui bibendum quis. Duis tincidunt gravida mi vitae convallis. Maecenas ut nulla imperdiet ipsum lacinia ultrices a eget diam. Sed elementum leo quis tortor scelerisque ornare. Donec posuere tortor ut pellentesque vehicula. Aliquam erat nunc, luctus eget lacus nec, hendrerit blandit massa. Sed egestas nulla in felis ultrices cursus.</p><p>In purus tortor, malesuada ac egestas quis, finibus sit amet ipsum. Cras mattis maximus massa tempor semper. Phasellus non justo egestas nunc pulvinar dignissim vitae a massa. Aenean eleifend tortor a tincidunt tempor. Curabitur augue libero, venenatis id metus eu, pellentesque dictum urna. Proin posuere, leo vel sagittis bibendum, nulla est hendrerit orci, vel lacinia risus eros nec nisi. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus lacinia felis ut congue gravida. Nam at semper mi, a rutrum erat. Morbi quis sem non enim tristique pulvinar. Ut libero massa, tempus a metus a, consequat efficitur quam. Donec a dolor iaculis, imperdiet felis in, pretium massa. Sed et efficitur libero.</p>"
 		},
 		{
 			"name": "Seven of Pentacles",
@@ -710,7 +779,8 @@ var M = {
 			"no": "VII",
 			"img": "70.jpg",
 			"tags": [],
-			"description": ""
+			"description": "",
+			"details:": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ut dui sit amet diam dignissim dapibus. Nulla eros mauris, commodo ut arcu ac, semper accumsan metus. Sed non dignissim tellus. Quisque facilisis purus enim, in laoreet dui bibendum quis. Duis tincidunt gravida mi vitae convallis. Maecenas ut nulla imperdiet ipsum lacinia ultrices a eget diam. Sed elementum leo quis tortor scelerisque ornare. Donec posuere tortor ut pellentesque vehicula. Aliquam erat nunc, luctus eget lacus nec, hendrerit blandit massa. Sed egestas nulla in felis ultrices cursus.</p><p>In purus tortor, malesuada ac egestas quis, finibus sit amet ipsum. Cras mattis maximus massa tempor semper. Phasellus non justo egestas nunc pulvinar dignissim vitae a massa. Aenean eleifend tortor a tincidunt tempor. Curabitur augue libero, venenatis id metus eu, pellentesque dictum urna. Proin posuere, leo vel sagittis bibendum, nulla est hendrerit orci, vel lacinia risus eros nec nisi. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus lacinia felis ut congue gravida. Nam at semper mi, a rutrum erat. Morbi quis sem non enim tristique pulvinar. Ut libero massa, tempus a metus a, consequat efficitur quam. Donec a dolor iaculis, imperdiet felis in, pretium massa. Sed et efficitur libero.</p>"
 		},
 		{
 			"name": "Eight of Pentacles",
@@ -718,7 +788,8 @@ var M = {
 			"no": "VIII",
 			"img": "71.jpg",
 			"tags": [],
-			"description": ""
+			"description": "",
+			"details:": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ut dui sit amet diam dignissim dapibus. Nulla eros mauris, commodo ut arcu ac, semper accumsan metus. Sed non dignissim tellus. Quisque facilisis purus enim, in laoreet dui bibendum quis. Duis tincidunt gravida mi vitae convallis. Maecenas ut nulla imperdiet ipsum lacinia ultrices a eget diam. Sed elementum leo quis tortor scelerisque ornare. Donec posuere tortor ut pellentesque vehicula. Aliquam erat nunc, luctus eget lacus nec, hendrerit blandit massa. Sed egestas nulla in felis ultrices cursus.</p><p>In purus tortor, malesuada ac egestas quis, finibus sit amet ipsum. Cras mattis maximus massa tempor semper. Phasellus non justo egestas nunc pulvinar dignissim vitae a massa. Aenean eleifend tortor a tincidunt tempor. Curabitur augue libero, venenatis id metus eu, pellentesque dictum urna. Proin posuere, leo vel sagittis bibendum, nulla est hendrerit orci, vel lacinia risus eros nec nisi. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus lacinia felis ut congue gravida. Nam at semper mi, a rutrum erat. Morbi quis sem non enim tristique pulvinar. Ut libero massa, tempus a metus a, consequat efficitur quam. Donec a dolor iaculis, imperdiet felis in, pretium massa. Sed et efficitur libero.</p>"
 		},
 		{
 			"name": "Nine of Pentacles",
@@ -726,7 +797,8 @@ var M = {
 			"no": "IX",
 			"img": "72.jpg",
 			"tags": [],
-			"description": ""
+			"description": "",
+			"details:": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ut dui sit amet diam dignissim dapibus. Nulla eros mauris, commodo ut arcu ac, semper accumsan metus. Sed non dignissim tellus. Quisque facilisis purus enim, in laoreet dui bibendum quis. Duis tincidunt gravida mi vitae convallis. Maecenas ut nulla imperdiet ipsum lacinia ultrices a eget diam. Sed elementum leo quis tortor scelerisque ornare. Donec posuere tortor ut pellentesque vehicula. Aliquam erat nunc, luctus eget lacus nec, hendrerit blandit massa. Sed egestas nulla in felis ultrices cursus.</p><p>In purus tortor, malesuada ac egestas quis, finibus sit amet ipsum. Cras mattis maximus massa tempor semper. Phasellus non justo egestas nunc pulvinar dignissim vitae a massa. Aenean eleifend tortor a tincidunt tempor. Curabitur augue libero, venenatis id metus eu, pellentesque dictum urna. Proin posuere, leo vel sagittis bibendum, nulla est hendrerit orci, vel lacinia risus eros nec nisi. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus lacinia felis ut congue gravida. Nam at semper mi, a rutrum erat. Morbi quis sem non enim tristique pulvinar. Ut libero massa, tempus a metus a, consequat efficitur quam. Donec a dolor iaculis, imperdiet felis in, pretium massa. Sed et efficitur libero.</p>"
 		},
 		{
 			"name": "Ten of Pentacles",
@@ -734,7 +806,8 @@ var M = {
 			"no": "X",
 			"img": "73.jpg",
 			"tags": [],
-			"description": ""
+			"description": "",
+			"details:": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ut dui sit amet diam dignissim dapibus. Nulla eros mauris, commodo ut arcu ac, semper accumsan metus. Sed non dignissim tellus. Quisque facilisis purus enim, in laoreet dui bibendum quis. Duis tincidunt gravida mi vitae convallis. Maecenas ut nulla imperdiet ipsum lacinia ultrices a eget diam. Sed elementum leo quis tortor scelerisque ornare. Donec posuere tortor ut pellentesque vehicula. Aliquam erat nunc, luctus eget lacus nec, hendrerit blandit massa. Sed egestas nulla in felis ultrices cursus.</p><p>In purus tortor, malesuada ac egestas quis, finibus sit amet ipsum. Cras mattis maximus massa tempor semper. Phasellus non justo egestas nunc pulvinar dignissim vitae a massa. Aenean eleifend tortor a tincidunt tempor. Curabitur augue libero, venenatis id metus eu, pellentesque dictum urna. Proin posuere, leo vel sagittis bibendum, nulla est hendrerit orci, vel lacinia risus eros nec nisi. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus lacinia felis ut congue gravida. Nam at semper mi, a rutrum erat. Morbi quis sem non enim tristique pulvinar. Ut libero massa, tempus a metus a, consequat efficitur quam. Donec a dolor iaculis, imperdiet felis in, pretium massa. Sed et efficitur libero.</p>"
 		},
 		{
 			"name": "Page of Pentacles",
@@ -742,7 +815,8 @@ var M = {
 			"no": "",
 			"img": "74.jpg",
 			"tags": [],
-			"description": ""
+			"description": "",
+			"details:": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ut dui sit amet diam dignissim dapibus. Nulla eros mauris, commodo ut arcu ac, semper accumsan metus. Sed non dignissim tellus. Quisque facilisis purus enim, in laoreet dui bibendum quis. Duis tincidunt gravida mi vitae convallis. Maecenas ut nulla imperdiet ipsum lacinia ultrices a eget diam. Sed elementum leo quis tortor scelerisque ornare. Donec posuere tortor ut pellentesque vehicula. Aliquam erat nunc, luctus eget lacus nec, hendrerit blandit massa. Sed egestas nulla in felis ultrices cursus.</p><p>In purus tortor, malesuada ac egestas quis, finibus sit amet ipsum. Cras mattis maximus massa tempor semper. Phasellus non justo egestas nunc pulvinar dignissim vitae a massa. Aenean eleifend tortor a tincidunt tempor. Curabitur augue libero, venenatis id metus eu, pellentesque dictum urna. Proin posuere, leo vel sagittis bibendum, nulla est hendrerit orci, vel lacinia risus eros nec nisi. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus lacinia felis ut congue gravida. Nam at semper mi, a rutrum erat. Morbi quis sem non enim tristique pulvinar. Ut libero massa, tempus a metus a, consequat efficitur quam. Donec a dolor iaculis, imperdiet felis in, pretium massa. Sed et efficitur libero.</p>"
 		},
 		{
 			"name": "Knight of Pentacles",
@@ -750,7 +824,8 @@ var M = {
 			"no": "",
 			"img": "75.jpg",
 			"tags": [],
-			"description": ""
+			"description": "",
+			"details:": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ut dui sit amet diam dignissim dapibus. Nulla eros mauris, commodo ut arcu ac, semper accumsan metus. Sed non dignissim tellus. Quisque facilisis purus enim, in laoreet dui bibendum quis. Duis tincidunt gravida mi vitae convallis. Maecenas ut nulla imperdiet ipsum lacinia ultrices a eget diam. Sed elementum leo quis tortor scelerisque ornare. Donec posuere tortor ut pellentesque vehicula. Aliquam erat nunc, luctus eget lacus nec, hendrerit blandit massa. Sed egestas nulla in felis ultrices cursus.</p><p>In purus tortor, malesuada ac egestas quis, finibus sit amet ipsum. Cras mattis maximus massa tempor semper. Phasellus non justo egestas nunc pulvinar dignissim vitae a massa. Aenean eleifend tortor a tincidunt tempor. Curabitur augue libero, venenatis id metus eu, pellentesque dictum urna. Proin posuere, leo vel sagittis bibendum, nulla est hendrerit orci, vel lacinia risus eros nec nisi. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus lacinia felis ut congue gravida. Nam at semper mi, a rutrum erat. Morbi quis sem non enim tristique pulvinar. Ut libero massa, tempus a metus a, consequat efficitur quam. Donec a dolor iaculis, imperdiet felis in, pretium massa. Sed et efficitur libero.</p>"
 		},
 		{
 			"name": "Queen of Pentacles",
@@ -758,7 +833,8 @@ var M = {
 			"no": "",
 			"img": "76.jpg",
 			"tags": [],
-			"description": ""
+			"description": "",
+			"details:": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ut dui sit amet diam dignissim dapibus. Nulla eros mauris, commodo ut arcu ac, semper accumsan metus. Sed non dignissim tellus. Quisque facilisis purus enim, in laoreet dui bibendum quis. Duis tincidunt gravida mi vitae convallis. Maecenas ut nulla imperdiet ipsum lacinia ultrices a eget diam. Sed elementum leo quis tortor scelerisque ornare. Donec posuere tortor ut pellentesque vehicula. Aliquam erat nunc, luctus eget lacus nec, hendrerit blandit massa. Sed egestas nulla in felis ultrices cursus.</p><p>In purus tortor, malesuada ac egestas quis, finibus sit amet ipsum. Cras mattis maximus massa tempor semper. Phasellus non justo egestas nunc pulvinar dignissim vitae a massa. Aenean eleifend tortor a tincidunt tempor. Curabitur augue libero, venenatis id metus eu, pellentesque dictum urna. Proin posuere, leo vel sagittis bibendum, nulla est hendrerit orci, vel lacinia risus eros nec nisi. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus lacinia felis ut congue gravida. Nam at semper mi, a rutrum erat. Morbi quis sem non enim tristique pulvinar. Ut libero massa, tempus a metus a, consequat efficitur quam. Donec a dolor iaculis, imperdiet felis in, pretium massa. Sed et efficitur libero.</p>"
 		},
 		{
 			"name": "King of Pentacles",
@@ -766,7 +842,8 @@ var M = {
 			"no": "",
 			"img": "77.jpg",
 			"tags": [],
-			"description": ""
+			"description": "",
+			"details:": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ut dui sit amet diam dignissim dapibus. Nulla eros mauris, commodo ut arcu ac, semper accumsan metus. Sed non dignissim tellus. Quisque facilisis purus enim, in laoreet dui bibendum quis. Duis tincidunt gravida mi vitae convallis. Maecenas ut nulla imperdiet ipsum lacinia ultrices a eget diam. Sed elementum leo quis tortor scelerisque ornare. Donec posuere tortor ut pellentesque vehicula. Aliquam erat nunc, luctus eget lacus nec, hendrerit blandit massa. Sed egestas nulla in felis ultrices cursus.</p><p>In purus tortor, malesuada ac egestas quis, finibus sit amet ipsum. Cras mattis maximus massa tempor semper. Phasellus non justo egestas nunc pulvinar dignissim vitae a massa. Aenean eleifend tortor a tincidunt tempor. Curabitur augue libero, venenatis id metus eu, pellentesque dictum urna. Proin posuere, leo vel sagittis bibendum, nulla est hendrerit orci, vel lacinia risus eros nec nisi. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus lacinia felis ut congue gravida. Nam at semper mi, a rutrum erat. Morbi quis sem non enim tristique pulvinar. Ut libero massa, tempus a metus a, consequat efficitur quam. Donec a dolor iaculis, imperdiet felis in, pretium massa. Sed et efficitur libero.</p>"
 		},
 	],
 	"tags": [
