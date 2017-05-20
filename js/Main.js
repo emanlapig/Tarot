@@ -3,31 +3,40 @@
 // Controller
 var C = {
 	cards: [],
+	cards_loaded: 0,
+	check_cards: 0,
 	init: function() {
 		$( "div" ).on( "touchstart", function( e ) { e.preventDefault(); e.stopPropagation(); } );
 		$( ".main-menu #get-reading" ).on( "click touchstart", C.reading.init );
 	},
 	reading: {
 		mode: "single",
+		drawn: 0,
 		init: function() {
 			V.go_to_page( ".page.reading-menu" );
 			V.reading.load_decks();
 			$( ".page.reading-menu #single-card" ).on( "click touchstart", C.reading.single );
+			$( ".page.reading-menu #three-card" ).on( "click touchstart", C.reading.three );
 		},
 		single: function() {
-			V.go_to_page( ".page.reading" );
-			C.reading.mode = "single";
-			shuffle.index = 0;
-			shuffle.flip = setInterval( function() {
-				$( "#card-" + shuffle.index ).addClass( "flip" );
-				shuffle.index += 1;
-				if ( shuffle.index === C.cards.length ) {
-					clearInterval( shuffle.flip );
-					shuffle.index = 0;
+			C.check_cards = setInterval( function() {
+				if ( C.cards_loaded == 78 ) {
+					V.go_to_page( ".page.reading" );
+					V.reading.mode = "single";
+					shuffle.init();
+					clearInterval( C.check_cards );
 				}
-			}, 50 );
-			setTimeout( C.reading.bind_touch, 50*C.cards.length );
-			$( ".page.reading #done-shuffling" ).on( "click touchstart", shuffle.collectShuffle );
+			}, 200 );
+		},
+		three: function() {
+			C.check_cards = setInterval( function() {
+				if ( C.cards_loaded == 78 ) {
+					V.go_to_page( ".page.reading" );
+					V.reading.mode = "three";
+					shuffle.init();
+					clearInterval( C.check_cards );
+				}
+			}, 200 );
 		},
 		bind_touch: function() {
 			$( ".touch-area" ).on( "touchmove mousemove", function( e ) {
@@ -50,7 +59,8 @@ var C = {
 							x + cardWidth,
 							y,
 							y + cardWidth*1.5,
-							i
+							i,
+							false
 						];
 						$( "#card-" + i ).css( { "left": x + "px", "top": y + "px" } );
 					}
@@ -63,13 +73,14 @@ var C = {
 // View
 var V = {
 	reading: {
+		mode: "single",
 		load_decks: function() {
 			for ( var i=0; i<M.cards.length; i++ ) {
 				var card = document.createElement( "div" );
 				card.setAttribute( "class", "card" );
 				card.setAttribute( "id", "card-" + i );
 				card.setAttribute( "data-card", i );
-				card.innerHTML = "<img src='img/decks/UWaite/" + i + ".jpg' />";
+				card.innerHTML = "<img src='img/decks/UWaite/" + i + ".jpg' onload='C.cards_loaded++;'/>";
 				$( ".reading" ).append( card );
 				var cardWidth = .05 * window.innerWidth,
 					boxWidth = Math.floor( cardWidth * 13 ),
@@ -81,7 +92,8 @@ var V = {
 					x + cardWidth,
 					y,
 					y + cardWidth*1.5,
-					i
+					i,
+					false
 				]);
 				$( card ).css( { "left": x + "px", "top": y + "px" } ).on( "click touchstart", function( e ) {
 					V.reading.draw_card( $( e.target ).parent().attr( "data-card" ) );
@@ -90,31 +102,63 @@ var V = {
 		},
 		draw_card: function( card ) {
 			console.log( card );
-			if ( C.reading.mode === "single" ) {
-				$( "#card-" + card ).addClass( "draw-1" );
+			if ( V.reading.mode === "single" ) {
+				$( "#card-" + card ).addClass( "draw-1" ).removeClass( "stack" );
 				$( ".card:not(#card-" + card + ")" ).addClass( "collect" );
 				setTimeout( function() {
 					$( ".card:not(#card-" + card + ")" ).addClass( "hidden" );
 					$( "#card-" + card ).removeClass( "flip" );
 				}, 1000 );
-			};
+			}
+			if ( V.reading.mode === "three" ) {
+				C.reading.drawn += 1;
+				$( "#card-" + card ).addClass( "draw-3 draw-3-" + C.reading.drawn ).removeClass( "stack" );
+				setTimeout( function() {
+					$( ".draw-3-" + C.reading.drawn ).removeClass( "flip" );
+				}, 1000 );
+				if ( C.reading.drawn === 3 ) {
+					setTimeout( function() {
+						$( ".card:not(.draw-3)" ).addClass( "collect" );
+					}, 2000 );
+					setTimeout( function() {
+						$( ".card:not(.draw-3)" ).addClass( "hidden" );
+					}, 2200 );
+				}
+			}
 		},
 		shuffle: {
 			index: 0,
-			collect: 0,
+			stack: 0,
 			flip: 0,
-			collectShuffle: function() {
+			all_shuffled: false,
+			init: function() {
+				shuffle.index = 0;
+				shuffle.flip = setInterval( function() {
+					$( "#card-" + shuffle.index ).addClass( "flip" );
+					shuffle.index += 1;
+					if ( shuffle.index === C.cards.length ) {
+						clearInterval( shuffle.flip );
+						shuffle.index = 0;
+					}
+				}, 50 );
+				setTimeout( C.reading.bind_touch, 50*C.cards.length );
+				setTimeout( function() {
+					$( ".page.reading #done-shuffling" ).on( "click touchstart", shuffle.stack_cards ).removeClass( "hidden" ).css( { "z-index": 201 } );
+				}, 50*C.cards.length + 2000 );
+			},
+			stack_cards: function() {
 				$( ".touch-area" ).unbind();
+				$( ".page.reading #done-shuffling" ).addClass( "hidden" ).css( { "z-index": -1 } );
 				C.cards.sort( function( a, b ) {
 					return a[0] - b[0];
 				});
 				shuffle.index = 0;
-				shuffle.collect = setInterval( function() {
-					$( "#card-" + C.cards[ shuffle.index ][4] ).css( { "top": window.innerHeight - 200 + "px", "left": shuffle.index*10 + 100 + "px", "z-index": shuffle.index } );
+				shuffle.stack = setInterval( function() {
+					$( "#card-" + C.cards[ shuffle.index ][4] ).css( { "top": window.innerHeight - 150 + "px", "left": shuffle.index*10 + 100 + "px", "z-index": shuffle.index } ).addClass( "stack" );
 					shuffle.index += 1;
 					if ( shuffle.index === C.cards.length ) {
 						$( ".touch-area" ).css( "display", "none" );
-						clearInterval( shuffle.collect );
+						clearInterval( shuffle.stack );
 					}
 				}, 50 );
 			}
@@ -129,7 +173,7 @@ var V = {
 		}
 		setTimeout( function() {
 			$( to ).removeClass( "hidden" ).addClass( "show" );
-		}, 200 );
+		}, 500 );
 	},
 }
 
