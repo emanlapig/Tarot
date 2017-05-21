@@ -7,6 +7,7 @@ body {
 	height: 100%;
 	overflow: hidden;
 	font-size: 16px;
+	background: #4b335d;
 }
 
 .page {
@@ -31,7 +32,7 @@ body {
 			right: 20px;
 		}
 		.touch-area {
-			display: block;
+			display: none;
 			position: absolute;
 			width: 100%;
 			height: 100%;
@@ -136,10 +137,12 @@ a {
 }
 
 .blue-grad {
-	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#482677+0,65319d+74 */
+	display: block;
+	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#482677+0,7939a9+74 */
 	background: #482677; /* Old browsers */
-	background: -moz-linear-gradient(top, #482677 0%, #65319d 74%); /* FF3.6-15 */
-	background: -webkit-linear-gradient(top, #482677 0%,#65319d 74%); /* Chrome10-25,Safari5.1-6 */
-	background: linear-gradient(to bottom, #482677 0%,#65319d 74%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#482677', endColorstr='#65319d',GradientType=0 ); /* IE6-9 */
+	background: -moz-linear-gradient(top, #482677 0%, #7939a9 74%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(top, #482677 0%,#7939a9 74%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to bottom, #482677 0%,#7939a9 74%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#482677', endColorstr='#7939a9',GradientType=0 ); /* IE6-9 */
+	box-shadow: -4px 0px 10px rgba(0,0,0,0.5);
 }

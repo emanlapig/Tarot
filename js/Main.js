@@ -141,10 +141,11 @@ var V = {
 						shuffle.index = 0;
 					}
 				}, 50 );
+				$( ".touch-area" ).css( { "display": "block" } );
 				setTimeout( C.reading.bind_touch, 50*C.cards.length );
 				setTimeout( function() {
 					$( ".page.reading #done-shuffling" ).on( "click touchstart", shuffle.stack_cards ).removeClass( "hidden" ).css( { "z-index": 201 } );
-				}, 50*C.cards.length + 2000 );
+				}, 50*C.cards.length + 4000 );
 			},
 			stack_cards: function() {
 				$( ".touch-area" ).unbind();
